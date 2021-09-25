@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+# MyBatis won't check DB connection during start up
+spring:
+  datasource:
+    username: order_center_admin
+    password: jy199510
+    url: jdbc:mysql://localhost:3306/order_center?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.nice.order.center.dao.entity
+
+# Show SQL of MyBatis
+logging:
+  level:
+    com:
+      example:
+        mapper: debug

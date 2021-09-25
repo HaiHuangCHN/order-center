@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nice.order.center.dao.mapper.OrderDetailMapper">
+    <resultMap id="BaseResultMap" type="com.nice.order.center.dao.entity.OrderDetail">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <!--MyBatis cannot support ENUM, TODO Learn why and how to support-->
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="total_amount" jdbcType="DECIMAL" property="totalAmount"/>
+        <result column="currency" jdbcType="CHAR" property="currency"/>
+        <result column="payment_status" jdbcType="TINYINT" property="paymentStatus"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <!--MyBatis can support BOOLEAN-->
+        <result column="yn" jdbcType="BOOLEAN" property="yn"/>
+        <result column="created_by" jdbcType="VARCHAR" property="createdBy"/>
+        <!--MyBatis cannot support DATETIME, TODO Learn why and how to support-->
+        <result column="created_at" jdbcType="TIMESTAMP" property="created_at"/>
+        <result column="updated_by" jdbcType="VARCHAR" property="updated_by"/>
+        <result column="updated_at" jdbcType="TIMESTAMP" property="updated_at"/>
+        <!--TODO To learn more-->
+    </resultMap>
+</mapper>
