@@ -28,11 +28,11 @@ public class DESUtilTest {
     /**
      * ebe3d1376885023dcca963e327a457f0
      */
-    private static  final String MD5_ENCODE = MD5Util.lowercaseMD5("1643768714949" + "12345678" + "{\"deliveryTypeId\":\"HOP\"}");
-
-    private static final String ENCODED_STR = "Hj+3yBzS4L5nU7z9XX+EBKTJvVRm6o5ZbyVba7LSQQeaDR8QE1wdIBeddECLsWObvf7NFApkpckKoO5xplZtgftjNG3JQXS1OW8ls9tiefA=";
+    private static  final String MD5_ENCODE = MD5Util.lowercaseMD5("1643768714949" + KEY_STR + "{\"deliveryTypeId\":\"HOP\"}");
 
     private static String DATA = "{\"sign\":\"" + MD5_ENCODE + "\"," + "\"data\":{\"deliveryTypeId\":\"HOP\"}}";
+
+    private static final String ENCODED_STR = "Hj+3yBzS4L5nU7z9XX+EBKTJvVRm6o5ZbyVba7LSQQeaDR8QE1wdIBeddECLsWObvf7NFApkpckKoO5xplZtgftjNG3JQXS1OW8ls9tiefA=";
 
     @Test
     public void testEncryptStr() throws InvalidAlgorithmParameterException, NoSuchPaddingException,
@@ -43,8 +43,8 @@ public class DESUtilTest {
 
     @Test
     public void testDecryptStr() throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, InvalidKeySpecException, BadPaddingException, InvalidKeyException {
-        String desEncode = DESUtil.decryptStr(KEY_STR, ENCODED_STR);
-        assertEquals(desEncode, DATA);
+        String desDecode = DESUtil.decryptStr(KEY_STR, ENCODED_STR);
+        assertEquals(desDecode, DATA);
     }
 
 
