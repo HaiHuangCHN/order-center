@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Setter
 public class OrderDetail extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -8288940243687399622L;
 
     /**
      * Unique ID for each record in the table

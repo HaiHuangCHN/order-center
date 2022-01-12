@@ -21,6 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
+
     @Bean
     public Docket api() {
         // TODO Docket is?
@@ -34,5 +35,6 @@ public class SwaggerConfig {
         return new ApiInfoBuilder().title("Order Center").description("Application to handle any request related to order")
                 .termsOfServiceUrl("https://www.nice.com").contact(new Contact("hai.huang.a@outlook.com", "", "")).version("1.0").build();
     }
+
 
 }

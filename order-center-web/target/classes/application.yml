@@ -9,6 +9,36 @@ spring:
     url: jdbc:mysql://localhost:3306/order_center?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  cache:
+    # Normally it is no need to configure cache type(cache sequence: JCache -> EhCache -> "Redis" -> Guava), as Spring will configure automatically according to the dependency. But it is recommended to configure manually to avoid unexpected case
+    type: redis
+  # Redis server address
+  redis:
+    host: localhost
+    # Redis server connection password (default null)
+    # password: MIIJKQIBAAKCAgEAzTh5/vqVIEXvznfBwXVubOxjc58BxUqikObPuB09mNVY10JVPwAJw7rN9dWQaTkndD+XUI+zIwQhlh9oVwDrEWs/vcDfWOyf3fhRe76YzfbG1ZDQYLDBDc2RInfJ46KAUzyG8TFG6WnmM+ucaL3kQKpZdL1OfSr+ECNON9tq4IX3XZjdv0EIE3ybYpe/yc0DXoBCUtBcPL4wKCYmoGe011b5zW+2ikCREi9+VusWBs+woSmaFiLQVBGzrNmHbiZ3WBGbY00vGNrT6uGSPZB0kdxOUr+PCIoC0Vy5xAjjGTnfPiFcYlrL4d6+hhcEvUQBOADbZrMe6q1QA3rmNRq9K+rGUfYVaeabeYuvSIrri9nFuVjZ0DDTXffVWGYDkxV2Q2P1fpNEGXuTPj7XKwvIFxHuZoUeaXrbnqFMlUm2Jtrn67Cg
+    # Redis server port
+    port: 6379
+    # Redis database index
+    database: 0
+    # Connection pool max connection number (use negative number to indicate no limit)
+    lettuce:
+      pool:
+        max-active: 8
+        # Connection pool max block waiting time(millisecond)
+        max-wait: -1
+        # Connection pool max unused time
+        max-idle: 8
+        # Connection pool min unused time
+        min-idle: 0
+        # Connection timeout(millisecond)
+        timeout: 5000
+
+# Cache related config
+cache:
+  default:
+    expire-time: 3600
+
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.nice.order.center.dao.entity
