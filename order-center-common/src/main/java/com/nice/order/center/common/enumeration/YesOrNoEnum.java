@@ -1,4 +1,4 @@
-package com.nice.order.center.common;
+package com.nice.order.center.common.enumeration;
 
 public enum YesOrNoEnum {
 
