@@ -11,6 +11,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = { PasswordAnnoValidator.class })
 public @interface PasswordAnno {
 
+
     /**
      * Message
      * 
@@ -21,4 +22,6 @@ public @interface PasswordAnno {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
+
 }

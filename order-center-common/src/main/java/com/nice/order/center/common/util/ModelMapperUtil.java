@@ -9,6 +9,7 @@ import org.modelmapper.convention.MatchingStrategies;
  */
 public class ModelMapperUtil {
 
+
     /**
      * Get modelMapper instance with MatchingStrategies=STANDARD and
      * FieldMatchingEnabled=true<br>
@@ -25,5 +26,6 @@ public class ModelMapperUtil {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD).setFieldMatchingEnabled(true).setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
         return modelMapper;
     }
+
 
 }

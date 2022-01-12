@@ -5,6 +5,7 @@ package com.nice.order.center.common.util;
  */
 public final class ExceptionUtils {
 
+
     /**
      * 返回堆栈信息（e.printStackTrace()的内容）
      *
@@ -45,5 +46,6 @@ public final class ExceptionUtils {
         }
         return sb.toString();
     }
+
 
 }

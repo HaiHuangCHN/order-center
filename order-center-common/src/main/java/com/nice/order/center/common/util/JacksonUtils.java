@@ -12,16 +12,17 @@ import java.io.IOException;
  *
  * JSON实用类（选型Jackson）
  */
-public class JsonUtils {
+public class JacksonUtils {
+
 
     /**
      * 默认objectMapper实例
      */
-    private static final ObjectMapper DEFAULT_OBJECT_MAPPER = new ObjectMapper();
+    public static final ObjectMapper DEFAULT_OBJECT_MAPPER = new ObjectMapper();
 
     private static ObjectMapper objectMapperCamel;
 
-    private JsonUtils() {}
+    private JacksonUtils() {}
 
     private static void initObjectMapperCamel() {
         objectMapperCamel = new ObjectMapper();
@@ -63,5 +64,6 @@ public class JsonUtils {
             throw new RuntimeException(e);
         }
     }
+
 
 }

@@ -4,6 +4,10 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class AgeAnnoValidator implements ConstraintValidator<AgeAnno, Integer> {
+
+
+    private static final Integer DEFAULT_AGE = new Integer(18);
+
     @Override
     public void initialize(AgeAnno constraintAnnotation) {
     }
@@ -13,6 +17,8 @@ public class AgeAnnoValidator implements ConstraintValidator<AgeAnno, Integer> {
         if (age == null) {
             return false;
         }
-        return age >= 18;
+        return age.compareTo(DEFAULT_AGE) > 0;
     }
+
+
 }

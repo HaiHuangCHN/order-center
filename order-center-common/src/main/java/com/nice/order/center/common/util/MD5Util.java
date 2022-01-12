@@ -12,6 +12,7 @@ import java.security.MessageDigest;
 @Slf4j
 public class MD5Util {
 
+
 	/**
 	 * Encode String(lowercase + digit)
 	 *
@@ -77,4 +78,6 @@ public class MD5Util {
 			return null;
 		}
 	}
+
+
 }

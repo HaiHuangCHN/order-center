@@ -13,18 +13,18 @@ import java.util.Map;
  * @date 2021/11/11 16:22
  * @since 0.1.0
  */
-public class JsonUtilsTest {
+public class JacksonUtilsTest {
 
 
     @Test
-    public void testJson() {
+    public void test1() {
         Map<String, Integer> hashMap = new HashMap<>();
         hashMap.put("CHARGE", 0);
         hashMap.put("ONLINE_PAYMENT", 0);
         hashMap.put("BALANCE_PAYMENT", 0);
         hashMap.put("REFUND", 5);
-        System.out.println(JsonUtils.objectToJsonCamel(hashMap));
-        HashMap map = JsonUtils.jsonToObject("{\"CHARGE\":0,\"ONLINE_PAYMENT\":0,\"BALANCE_PAYMENT\":0,\"REFUND\":5}", HashMap.class);
+        System.out.println(JacksonUtils.objectToJsonCamel(hashMap));
+        HashMap map = JacksonUtils.jsonToObject("{\"CHARGE\":0,\"ONLINE_PAYMENT\":0,\"BALANCE_PAYMENT\":0,\"REFUND\":5}", HashMap.class);
         System.out.println(map);
         System.out.println(map.get("CHARGE"));
         System.out.println(map.get("REFUND"));

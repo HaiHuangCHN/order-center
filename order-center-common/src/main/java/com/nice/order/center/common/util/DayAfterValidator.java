@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class DayAfterValidator implements ConstraintValidator<DayAfter, String> {
 
+
     private int dayAfter;
 
     @Override
@@ -39,5 +40,6 @@ public class DayAfterValidator implements ConstraintValidator<DayAfter, String> 
 
         return true;
     }
+
 
 }

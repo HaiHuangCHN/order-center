@@ -1,8 +1,5 @@
 package com.nice.order.center.common;
 
-/**
- * TODO
- */
 public enum YesOrNoEnum {
 
 

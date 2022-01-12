@@ -6,6 +6,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
 
 import java.util.HashMap;
@@ -14,7 +15,9 @@ import java.util.Map;
 /**
  * Token's encode and decode
  */
+@Slf4j
 public class JwtUtils {
+
 
     public static final String SECRET = "JKKLJO^*&FGasd64%hasdHK";
 
@@ -34,13 +37,13 @@ public class JwtUtils {
     public static String generateToken(Object profileInfo) {
         Assert.notNull(profileInfo, "The object must be not null");
         Map<String, Object> convertedMap = OtherUtils.convertObjToMap(profileInfo);
-        System.out.println(convertedMap);
+//        log.debug(convertedMap.toString());
 
         // header map
         Map<String, Object> headerMap = new HashMap<>();
         headerMap.put("alg", "HS256");
         headerMap.put("typ", "JWT");
-        System.out.println(headerMap);
+//        log.debug(headerMap.toString());
 
         // payload map
         Map<String, Object> payloadMap = new HashMap<>();
@@ -49,15 +52,14 @@ public class JwtUtils {
                 payloadMap.put(entrySet.getKey(), entrySet.getValue());
             }
         }
-        System.out.println(payloadMap);
+//        log.debug(payloadMap.toString());
 
         // build token
         Builder builder = JWT.create().withHeader(headerMap);
         for (Map.Entry<String, Object> entrySet : payloadMap.entrySet()) {
             builder = builder.withClaim(entrySet.getKey().toString(), entrySet.getValue().toString()); // signature
         }
-        String token = builder.sign(Algorithm.HMAC256(SECRET));
-        return token;
+        return builder.sign(Algorithm.HMAC256(SECRET));
     }
 
     /**
@@ -76,13 +78,13 @@ public class JwtUtils {
             // Fail to verify token, throw exception
             throw new RuntimeException("fail verify token");
         }
-        boolean isMatch = checkFields(decodedJwt.getClaims(), obj);
-        return isMatch;
+        return checkFields(decodedJwt.getClaims(), obj);
     }
 
     private static boolean checkFields(Map<String, Claim> claims, Object obj) {
         boolean isMatch = true;
-        Map<String, Object> objMap = OtherUtils.convertObjToMap(obj); // TODO Map<String, Object> why object? Would that effect the logic?
+        // TODO Map<String, Object> why object? Would that effect the logic?
+        Map<String, Object> objMap = OtherUtils.convertObjToMap(obj);
         removeElement(objMap);
         if (claims.size() != objMap.size()) {
             isMatch = false;

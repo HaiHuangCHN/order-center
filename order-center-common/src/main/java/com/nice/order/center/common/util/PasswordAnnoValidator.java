@@ -5,6 +5,7 @@ import javax.validation.ConstraintValidatorContext;
 
 public class PasswordAnnoValidator implements ConstraintValidator<PasswordAnno, String> {
 
+
     @Override
     public void initialize(PasswordAnno constraintAnnotation) {
     }
@@ -20,5 +21,6 @@ public class PasswordAnnoValidator implements ConstraintValidator<PasswordAnno, 
         }
         return false;
     }
+
 
 }

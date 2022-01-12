@@ -15,6 +15,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = {DayAfterValidator.class})
 public @interface DayAfter {
 
+
     String message() default "Field not valid";
 
     int dayAfter() default 2;
@@ -22,5 +23,6 @@ public @interface DayAfter {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
 
 }

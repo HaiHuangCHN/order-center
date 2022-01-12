@@ -14,6 +14,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = { AllowedValuesValidator.class })
 public @interface AllowedValues {
 
+
     /**
      * Message
      * 
@@ -31,4 +32,6 @@ public @interface AllowedValues {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
+
 }

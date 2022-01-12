@@ -13,12 +13,6 @@ import java.security.spec.InvalidKeySpecException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * TODO Fill in desc
- *
- * @author haihuang95@zto.com
- * @date 2021/10/11 09:22
- */
 @Slf4j
 public class DESUtilTest {
 

@@ -1,5 +1,5 @@
 /**
- * TODO Standardize code
+ * Utility Class
  *
  * @author haihuang95@zto.com
  * @date 2021/10/11 09:45
