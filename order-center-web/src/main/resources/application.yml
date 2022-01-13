@@ -48,5 +48,8 @@ mybatis:
 logging:
   level:
     com:
-      example:
-        mapper: debug
+      nice:
+        order:
+          center:
+            dao:
+              mapper: debug
