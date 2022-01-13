@@ -47,11 +47,11 @@ mybatis:
     map-underscore-to-camel-case: true
 
 # Show SQL of MyBatis
-logging:
-  level:
-    com:
-      nice:
-        order:
-          center:
-            dao:
-              mapper: debug
+#logging:
+#  level:
+#    com:
+#      nice:
+#        order:
+#          center:
+#            dao:
+#              mapper: debug
