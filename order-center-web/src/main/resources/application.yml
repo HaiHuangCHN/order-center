@@ -39,6 +39,7 @@ cache:
   default:
     expire-time: 3600
 
+# MyBatis
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.nice.order.center.dao.entity
