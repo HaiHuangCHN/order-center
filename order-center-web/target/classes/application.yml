@@ -39,13 +39,19 @@ cache:
   default:
     expire-time: 3600
 
+# MyBatis
 mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
-  type-aliases-package: com.nice.order.center.dao.entity
+#  mapper-locations: classpath:mapper/*Mapper.xml
+#  type-aliases-package: com.nice.order.center.dao.entity
+  configuration:
+    map-underscore-to-camel-case: true
 
 # Show SQL of MyBatis
 logging:
   level:
     com:
-      example:
-        mapper: debug
+      nice:
+        order:
+          center:
+            dao:
+              mapper: debug
