@@ -2,8 +2,10 @@ package com.nice.order.center.web.controller;
 
 import com.nice.order.center.common.util.ModelMapperUtil;
 import com.nice.order.center.service.OrderDetailService;
-import com.nice.order.center.service.dto.OrderDetailDTO;
-import com.nice.order.center.web.vo.OrderDetailVO;
+import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
+import com.nice.order.center.service.dto.res.OrderDetailResDTO;
+import com.nice.order.center.web.vo.req.OrderDetailReqVO;
+import com.nice.order.center.web.vo.res.OrderDetailResVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Slf4j
 @Controller
@@ -20,9 +23,15 @@ public class OrderDetailController {
     private OrderDetailService orderDetailService;
 
     @GetMapping(value = "/get/order/{userId}")
-    public ResponseEntity<OrderDetailVO> createOrder(@PathVariable("userId") Long userId) {
-        OrderDetailDTO dto = orderDetailService.findOrderDetailByUserId(userId);
-        return ResponseEntity.status(HttpStatus.OK).body(ModelMapperUtil.getModelMapperWithFieldMatching().map(dto, OrderDetailVO.class));
+    public ResponseEntity<OrderDetailResVO> getOrder(@PathVariable("userId") Long userId) {
+        OrderDetailResDTO dto = orderDetailService.findOrderDetailByUserId(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(dto, OrderDetailResVO.class));
+    }
+
+    @PostMapping(value = "/new/order")
+    public ResponseEntity<Boolean> createOrder(OrderDetailReqVO orderDetailReqVO) {
+        Boolean result = orderDetailService.addNewOrder(ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqVO, OrderDetailReqDTO.class));
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
 }

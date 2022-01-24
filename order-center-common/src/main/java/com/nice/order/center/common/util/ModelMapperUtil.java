@@ -9,6 +9,7 @@ import org.modelmapper.convention.MatchingStrategies;
  */
 public class ModelMapperUtil {
 
+    public static final ModelMapper DEFAULT_MODEL_MAPPER = new ModelMapper();
 
     /**
      * Get modelMapper instance with MatchingStrategies=STANDARD and
