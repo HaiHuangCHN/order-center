@@ -3,6 +3,9 @@ server:
 
 # MyBatis won't check DB connection during start up
 spring:
+  application:
+    name: order-center
+
   datasource:
     username: order_center_admin
     password: jy199510

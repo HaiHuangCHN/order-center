@@ -2,6 +2,7 @@ package com.nice.order.center.web.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -17,6 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  *
  * TODO Learn more Swagger knowledge, like OAuth 2 integration
  */
+@Profile({"!prd-aa & !prd-bb"})
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
@@ -32,8 +34,12 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Order Center").description("Application to handle any request related to order")
-                .termsOfServiceUrl("https://www.nice.com").contact(new Contact("hai.huang.a@outlook.com", "", "")).version("1.0").build();
+        return new ApiInfoBuilder()
+                .title("Order Center")
+                .description("Application to handle any request related to order")
+                .termsOfServiceUrl("https://www.nice.com")
+                .contact(new Contact("hai.huang.a@outlook.com", "", ""))
+                .version("1.0").build();
     }
 
 

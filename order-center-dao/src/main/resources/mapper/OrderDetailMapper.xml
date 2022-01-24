@@ -15,6 +15,7 @@
         <!--MyBatis cannot support DATETIME, TODO Learn why and how to support-->
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_by" jdbcType="VARCHAR" property="updatedBy"/>
+        <!--MyBatis cannot support DATETIME, TODO Learn why and how to support-->
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
         <!--TODO To learn more-->
     </resultMap>

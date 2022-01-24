@@ -1,11 +1,14 @@
 package com.nice.order.center.service;
 
-import com.nice.order.center.service.dto.OrderDetailDTO;
+import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
+import com.nice.order.center.service.dto.res.OrderDetailResDTO;
 
 public interface OrderDetailService {
 
 
-    OrderDetailDTO findOrderDetailByUserId(Long userId);
+    OrderDetailResDTO findOrderDetailByUserId(Long userId);
+
+    Boolean addNewOrder(OrderDetailReqDTO orderDetailReqDTO);
 
 
 }

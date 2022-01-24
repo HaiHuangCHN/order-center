@@ -13,9 +13,10 @@
         <result column="yn" jdbcType="BOOLEAN" property="yn"/>
         <result column="created_by" jdbcType="VARCHAR" property="createdBy"/>
         <!--MyBatis cannot support DATETIME, TODO Learn why and how to support-->
-        <result column="created_at" jdbcType="TIMESTAMP" property="created_at"/>
-        <result column="updated_by" jdbcType="VARCHAR" property="updated_by"/>
-        <result column="updated_at" jdbcType="TIMESTAMP" property="updated_at"/>
+        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
+        <result column="updated_by" jdbcType="VARCHAR" property="updatedBy"/>
+        <!--MyBatis cannot support DATETIME, TODO Learn why and how to support-->
+        <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
         <!--TODO To learn more-->
     </resultMap>
 </mapper>

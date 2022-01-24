@@ -23,7 +23,15 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 
 
     @Value("${cache.default.expire-time}")
-    private int defaultExpireTime;
+    public void setDefaultExpireTime(Integer defaultExpireTime) {
+        this.defaultExpireTime = defaultExpireTime;
+    }
+
+    public Integer getDefaultExpireTime() {
+        return defaultExpireTime;
+    }
+
+    private Integer defaultExpireTime;
 
 //	/**
 //	 * bean definition of key generation strategypackage name + class name + method name + all arguments

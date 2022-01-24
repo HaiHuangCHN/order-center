@@ -3,6 +3,9 @@ server:
 
 # MyBatis won't check DB connection during start up
 spring:
+  application:
+    name: order-center
+
   datasource:
     username: order_center_admin
     password: jy199510
@@ -39,6 +42,7 @@ cache:
   default:
     expire-time: 3600
 
+# MyBatis
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.nice.order.center.dao.entity
@@ -47,5 +51,8 @@ mybatis:
 logging:
   level:
     com:
-      example:
-        mapper: debug
+      nice:
+        order:
+          center:
+            dao:
+              mapper: debug

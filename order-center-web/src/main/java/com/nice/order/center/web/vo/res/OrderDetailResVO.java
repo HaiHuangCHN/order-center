@@ -1,4 +1,4 @@
-package com.nice.order.center.service.dto;
+package com.nice.order.center.web.vo.res;
 
 import lombok.Data;
 
@@ -6,9 +6,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * No yn filed
+ */
 @Data
-public class OrderDetailDTO implements Serializable {
-
+public class OrderDetailResVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,8 +26,6 @@ public class OrderDetailDTO implements Serializable {
 
     private Long userId;
 
-    private Boolean yn;
-
     private String createdBy;
 
     private LocalDateTime createdAt;
@@ -33,6 +33,5 @@ public class OrderDetailDTO implements Serializable {
     private String updatedBy;
 
     private LocalDateTime updatedAt;
-
 
 }
