@@ -22,6 +22,6 @@ public interface OrderDetailMapper/* extends Mapper<OrderDetail>*/ {
 //            @Result(property = "totalAmount", column = "total_amount"),
 //            @Result(property = "paymentStatus", column = "payment_status")
 //    })
-    OrderDetail getArticle(@Param("id") Long id);
+    OrderDetail selectByUserId(@Param("id") Long id);
 
 }

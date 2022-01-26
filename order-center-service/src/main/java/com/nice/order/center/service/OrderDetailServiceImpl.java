@@ -29,7 +29,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 //                .andEqualTo(OrderDetail::getYn, (byte)1));
 //        OrderDetail existingRecord = orderDetailMapper.selectOneByExample(example);
 //        return ModelMapperUtil.getModelMapperWithFieldMatching().map(existingRecord, OrderDetailDTO.class);
-        OrderDetail existingRecord = orderDetailMapper.getArticle(1L);
+        OrderDetail existingRecord = orderDetailMapper.selectByUserId(userId);
         return ModelMapperUtil.getModelMapperWithFieldMatching().map(existingRecord, OrderDetailDTO.class);
     }
 
