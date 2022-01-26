@@ -9,6 +9,14 @@ import org.apache.ibatis.annotations.*;
  * TODO To learn more
  */
 @Mapper
+// If forget to add @Mapper
+//Description:
+//        Field orderDetailMapper in com.nice.order.center.service.OrderDetailServiceImpl required a bean of type 'com.nice.order.center.dao.mapper.OrderDetailMapper' that could not be found.
+//        The injection point has the following annotations:
+//        - @org.springframework.beans.factory.annotation.Autowired(required=true)
+//
+//Action:
+//        Consider defining a bean of type 'com.nice.order.center.dao.mapper.OrderDetailMapper' in your configuration.
 public interface OrderDetailMapper/* extends Mapper<OrderDetail>*/ {
 
     @Select("SELECT * FROM order_detail WHERE id = #{id}")
