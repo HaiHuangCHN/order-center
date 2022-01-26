@@ -38,9 +38,9 @@
             <version>2.2.0</version>
         </dependency>
         <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper</artifactId>
-            <version>4.0.4</version>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

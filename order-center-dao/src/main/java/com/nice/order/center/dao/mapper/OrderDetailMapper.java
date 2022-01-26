@@ -2,7 +2,6 @@ package com.nice.order.center.dao.mapper;
 
 import com.nice.order.center.dao.entity.OrderDetail;
 import org.springframework.stereotype.Repository;
-import tk.mybatis.mapper.common.Mapper;
 
 /**
  * TODO To learn more
