@@ -14,8 +14,6 @@ public class OrderDetailReqVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
-
     private String status;
 
     private BigDecimal totalAmount;
@@ -25,13 +23,5 @@ public class OrderDetailReqVO implements Serializable {
     private Integer paymentStatus;
 
     private Long userId;
-
-    private String createdBy;
-
-    private LocalDateTime createdAt;
-
-    private String updatedBy;
-
-    private LocalDateTime updatedAt;
 
 }

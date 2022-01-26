@@ -35,11 +35,15 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
-    public Boolean addNewOrder(OrderDetailReqDTO orderDetailReqDTO) {
+    public String addNewOrder(OrderDetailReqDTO orderDetailReqDTO) {
         OrderDetail orderDetail = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqDTO, OrderDetail.class);
-        // TODO Get the user from session instead of hard code
         orderDetail.setCreatedBy(Constants.SYSTEM);
-        return orderDetailMapper.insert(orderDetail) == 1;
+        boolean updateN = orderDetailMapper.insert(orderDetail) == 1;
+        if (!updateN) {
+            // TODO
+        }
+        // TODO
+        return "A";
     }
 
 
