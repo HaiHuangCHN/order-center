@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  *
  * TODO Learn more Swagger knowledge, like OAuth 2 integration
  */
-@Profile({"!prd-aa & !prd-bb"})
+@Profile({"dev", "uat", "!prd-aa & !prd-bb & !prd-cc"})
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
