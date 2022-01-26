@@ -27,24 +27,25 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
     @Override
     public OrderDetailResDTO findOrderDetailByUserId(Long userId) {
-        Example example = MapperUtils.buildExample(OrderDetail.class, o -> o
-                .andEqualTo(OrderDetail::getUserId, userId)
-                .andEqualTo(OrderDetail::getYn, YesOrNoEnum.YES.getCode()));
-        OrderDetail orderDetail = orderDetailMapper.selectOneByExample(example);
+//        Example example = MapperUtils.buildExample(OrderDetail.class, o -> o
+//                .andEqualTo(OrderDetail::getUserId, userId)
+//                .andEqualTo(OrderDetail::getYn, YesOrNoEnum.YES.getCode()));
+//        OrderDetail orderDetail = orderDetailMapper.selectOneByExample(example);
+        OrderDetail orderDetail = orderDetailMapper.selectByUserId(userId);
         return ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetail, OrderDetailResDTO.class);
     }
 
-    @Override
-    public String addNewOrder(OrderDetailReqDTO orderDetailReqDTO) {
-        OrderDetail orderDetail = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqDTO, OrderDetail.class);
-        orderDetail.setCreatedBy(Constants.SYSTEM);
-        boolean updateN = orderDetailMapper.insert(orderDetail) == 1;
-        if (!updateN) {
-            // TODO
-        }
-        // TODO
-        return "A";
-    }
+//    @Override
+//    public String addNewOrder(OrderDetailReqDTO orderDetailReqDTO) {
+//        OrderDetail orderDetail = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqDTO, OrderDetail.class);
+//        orderDetail.setCreatedBy(Constants.SYSTEM);
+//        boolean updateN = orderDetailMapper.insert(orderDetail) == 1;
+//        if (!updateN) {
+//            // TODO
+//        }
+//        // TODO
+//        return "A";
+//    }
 
 
 }

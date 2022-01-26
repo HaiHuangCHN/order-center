@@ -8,7 +8,7 @@ public interface OrderDetailService {
 
     OrderDetailResDTO findOrderDetailByUserId(Long userId);
 
-    String addNewOrder(OrderDetailReqDTO orderDetailReqDTO);
+//    String addNewOrder(OrderDetailReqDTO orderDetailReqDTO);
 
 
 }

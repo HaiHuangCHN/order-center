@@ -19,4 +19,8 @@
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
         <!--TODO To learn more-->
     </resultMap>
+
+    <select id="selectByUserId" resultType="com.nice.order.center.dao.entity.OrderDetail">
+        select * from `order_detail` where id = #{id}
+    </select>
 </mapper>
