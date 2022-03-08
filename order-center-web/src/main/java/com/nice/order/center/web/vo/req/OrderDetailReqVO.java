@@ -4,7 +4,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * No yn filed
@@ -12,15 +11,11 @@ import java.time.LocalDateTime;
 @Data
 public class OrderDetailReqVO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-    private String status;
+    private static final long serialVersionUID = 8638145783117356900L;
 
     private BigDecimal totalAmount;
 
     private String currency;
-
-    private Integer paymentStatus;
 
     private Long userId;
 

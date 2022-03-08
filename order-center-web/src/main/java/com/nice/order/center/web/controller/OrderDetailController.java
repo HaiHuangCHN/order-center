@@ -28,7 +28,7 @@ public class OrderDetailController {
         return ResponseEntity.status(HttpStatus.OK).body(ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(dto, OrderDetailResVO.class));
     }
 
-    @PostMapping(value = "/new/order")
+    @PostMapping(value = "/create/order")
     public ResponseEntity<String> createOrder(OrderDetailReqVO orderDetailReqVO) {
         OrderDetailReqDTO orderDetailReqDto = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqVO, OrderDetailReqDTO.class);
         // TODO Get the user from session instead of hard code
