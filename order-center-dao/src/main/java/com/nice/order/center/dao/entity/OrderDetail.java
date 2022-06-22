@@ -26,7 +26,7 @@ public class OrderDetail extends BaseEntity implements Serializable {
     /**
      * Status of an order
      */
-    @Column(name = "status", nullable = false)
+    @Column(name = "order_status", nullable = false)
     // TODO To learn more
     @Enumerated(value = EnumType.STRING)
     private OrderDetailStatusEnum status;

@@ -14,6 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @Controller
@@ -22,8 +25,13 @@ public class OrderDetailController {
     @Autowired
     private OrderDetailService orderDetailService;
 
-    @GetMapping(value = "/get/order/{userId}")
-    public ResponseEntity<OrderDetailResVO> getOrder(@PathVariable("userId") Long userId) {
+//    @GetMapping(value = "/get/order/{userId}")
+//    public ResponseEntity<OrderDetailResVO> getOrder(@PathVariable("userId") Long userId) {
+    @GetMapping(value = "/get/order")
+    public ResponseEntity<OrderDetailResVO> getOrder(HttpServletRequest request, @RequestParam("userId") Long userId) {
+        log.info("servletPath：{}", request.getServletPath());
+        log.info("userId：{}", request.getParameter("userId"));
+        log.info("arbitrary：{}", request.getParameter("arbitrary"));
         OrderDetailResDTO dto = orderDetailService.findOrderDetailByUserId(userId);
         return ResponseEntity.status(HttpStatus.OK).body(ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(dto, OrderDetailResVO.class));
     }

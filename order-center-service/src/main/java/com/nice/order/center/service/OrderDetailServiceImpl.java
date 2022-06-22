@@ -2,6 +2,7 @@ package com.nice.order.center.service;
 
 import com.nice.order.center.common.constant.Constants;
 import com.nice.order.center.common.enumeration.YesOrNoEnum;
+import com.nice.order.center.common.util.JacksonUtils;
 import com.nice.order.center.common.util.ModelMapperUtil;
 import com.nice.order.center.dao.entity.OrderDetail;
 import com.nice.order.center.dao.mapper.OrderDetailMapper;
@@ -13,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
+
+import java.time.LocalDateTime;
 
 /**
  * Try no @Autowired
@@ -37,8 +40,12 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     @Override
     public String addNewOrder(OrderDetailReqDTO orderDetailReqDTO) {
         OrderDetail orderDetail = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqDTO, OrderDetail.class);
+        orderDetail.setYn(YesOrNoEnum.YES.getCode());
         orderDetail.setCreatedBy(Constants.SYSTEM);
+        orderDetail.setCreatedAt(LocalDateTime.now());
+        // orderDetailMapper.insert() 可以返回自增 ID
         boolean updateN = orderDetailMapper.insert(orderDetail) == 1;
+        logger.info("测试返回 orderDetail： {}", JacksonUtils.objectToJsonCamel(orderDetail));
         if (!updateN) {
             // TODO
         }
