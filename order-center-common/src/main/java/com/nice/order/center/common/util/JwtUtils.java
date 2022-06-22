@@ -21,13 +21,6 @@ public class JwtUtils {
 
     public static final String SECRET = "JKKLJO^*&FGasd64%hasdHK";
 
-//	public static String secret;
-//
-//	@Value("${secret}")
-//	public void setSecret(String secret) {
-//		JwtUtils.secret = secret;
-//	}
-
     /**
      * Generate token
      *

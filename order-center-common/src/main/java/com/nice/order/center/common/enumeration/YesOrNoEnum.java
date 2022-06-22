@@ -1,28 +1,20 @@
 package com.nice.order.center.common.enumeration;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum YesOrNoEnum {
 
 
-    YES(1, "是"),
+    YES(Boolean.TRUE, "是"),
 
-    NO(0, "否");
+    NO(Boolean.FALSE, "否");
 
-    private Integer code;
+    private final Boolean code;
 
-    private String remark;
-
-    public Integer getCode() {
-        return this.code;
-    }
-
-    public String getRemark() {
-        return this.remark;
-    }
-
-    YesOrNoEnum(Integer code, String remark) {
-        this.code = code;
-        this.remark = remark;
-    }
-
+    private final String remark;
 
 }

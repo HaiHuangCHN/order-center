@@ -6,7 +6,7 @@ import javax.validation.ConstraintValidatorContext;
 public class AgeAnnoValidator implements ConstraintValidator<AgeAnno, Integer> {
 
 
-    private static final Integer DEFAULT_AGE = new Integer(18);
+    private static final Integer DEFAULT_AGE = 18;
 
     @Override
     public void initialize(AgeAnno constraintAnnotation) {

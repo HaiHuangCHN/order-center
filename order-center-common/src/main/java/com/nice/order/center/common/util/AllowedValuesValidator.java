@@ -32,7 +32,7 @@ public class AllowedValuesValidator implements ConstraintValidator<AllowedValues
     }
 
     private List<String> convertToList(String constraintAnnotation) {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
 
         String[] strArray = constraintAnnotation.split(COMMA);
         for (String OneStr : strArray) {
