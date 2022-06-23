@@ -13,19 +13,20 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * TODO Fill in desc
- *
  * @author haihuang95@zto.com
  * @date 2022/3/24 17:36
+ * @deprecated 仅供测试使用
  */
 @Slf4j
 @RequiredArgsConstructor
 @Controller
+@Deprecated
 public class RedisController {
 
     private final StringRedisTemplate stringRedisTemplate;
@@ -48,6 +49,7 @@ public class RedisController {
         ExecutorService pool = Executors.newFixedThreadPool(100);
         for (int i = 0; i < 100; i++) {
             pool.submit(() -> {
+                // TODO 两个 for loop，为何得到递增的只是 100，而不是 100 * 10 = 1000？
                 // 配额码原子变量值增加，每次增加1
                 for (int j = 0; j < 10; j++) {
                     long count = redisCount.incrementAndGet();
@@ -55,9 +57,10 @@ public class RedisController {
                 }
             });
         }
-
-        log.info(LocalDateTimeUtil.convertToDate(LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(0, 0, 0, 0))).toString());
-        redisCount.expireAt(LocalDateTimeUtil.convertToDate(LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(0, 0, 0, 0))));
+        Date expireAt = LocalDateTimeUtil.convertToDate(LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(0,
+                0, 0, 0)));
+        log.info("expireAt：{}", expireAt);
+        redisCount.expireAt(expireAt);
 
         return redisCount;
     }
