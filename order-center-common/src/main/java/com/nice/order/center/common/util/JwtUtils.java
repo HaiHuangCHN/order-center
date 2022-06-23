@@ -18,7 +18,10 @@ import java.util.Map;
 @Slf4j
 public class JwtUtils {
 
-
+    /**
+     * @deprecated 测试用
+     */
+    @Deprecated
     public static final String SECRET = "JKKLJO^*&FGasd64%hasdHK";
 
     /**
@@ -27,7 +30,7 @@ public class JwtUtils {
      * @param profileInfo
      * @return
      */
-    public static String generateToken(Object profileInfo) {
+    public static String generateToken(Object profileInfo, String secret) {
         Assert.notNull(profileInfo, "The object must be not null");
         Map<String, Object> convertedMap = OtherUtils.convertObjToMap(profileInfo);
 //        log.debug(convertedMap.toString());
@@ -52,7 +55,7 @@ public class JwtUtils {
         for (Map.Entry<String, Object> entrySet : payloadMap.entrySet()) {
             builder = builder.withClaim(entrySet.getKey().toString(), entrySet.getValue().toString()); // signature
         }
-        return builder.sign(Algorithm.HMAC256(SECRET));
+        return builder.sign(Algorithm.HMAC256(secret));
     }
 
     /**
@@ -62,10 +65,10 @@ public class JwtUtils {
      * @param obj
      * @return
      */
-    public static boolean verifyToken(String token, Object obj) {
+    public static boolean verifyToken(String token, Object obj, String secret) {
         DecodedJWT decodedJwt = null;
         try {
-            JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
+            JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret)).build();
             decodedJwt = verifier.verify(token);
         } catch (Exception e) {
             // Fail to verify token, throw exception
