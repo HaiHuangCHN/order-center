@@ -15,9 +15,10 @@ import java.util.Random;
 public class RandomIPGeneratorUtilTest {
 
     @Test
-    public void testRandomIp() {
+    public void testRandomIp() throws InterruptedException {
         while (true) {
-            RandomIPGeneratorUtil.getRandomIp();
+            System.out.println(RandomIPGeneratorUtil.getRandomIp());
+            Thread.sleep(1000L);
         }
     }
 

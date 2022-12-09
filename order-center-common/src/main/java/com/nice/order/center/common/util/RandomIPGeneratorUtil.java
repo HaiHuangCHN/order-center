@@ -1,4 +1,4 @@
-package com.coe.relaybuy.utils;
+package com.nice.order.center.common.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

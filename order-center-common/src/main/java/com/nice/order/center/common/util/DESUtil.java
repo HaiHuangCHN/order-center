@@ -32,7 +32,7 @@ public class DESUtil {
     /**
      * 偏移变量，固定占8位字节
      */
-    private final static String IV_PARAMETER = "12345678";
+    private static final String IV_PARAMETER = "12345678";
 
     /**
      * 偏移变量，固定占8位字节
