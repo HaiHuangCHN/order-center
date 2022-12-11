@@ -5,11 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 /**
@@ -35,7 +33,7 @@ public class MD5Util {
      * @param str string need encoded
      * @return string has been encoded
      */
-    public static String lowercaseMD5(String str) throws NoSuchAlgorithmException {
+    public static String lowercaseMD5(String str) {
         try {
             // Get instance from MessageDigest
             MessageDigest messageDigest = MessageDigest.getInstance(MD5);
@@ -55,7 +53,7 @@ public class MD5Util {
             return bigInteger.toString(16);
         } catch (Exception e) {
             log.error("MD5 encode error", e);
-            throw e;
+            throw new RuntimeException(e);
         }
     }
 
@@ -65,7 +63,7 @@ public class MD5Util {
      * @param str string need encoded
      * @return string has been encoded
      */
-    public static String uppercaseMD5(String str) throws NoSuchAlgorithmException {
+    public static String uppercaseMD5(String str) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance(MD5);
             byte[] strBytes = str.getBytes(StandardCharsets.UTF_8);
@@ -81,12 +79,12 @@ public class MD5Util {
             return new String(str2);
         } catch (Exception e) {
             log.error("MD5 encode error", e);
-            throw e;
+            throw new RuntimeException(e);
         }
     }
 
     /**
-     * Encode String(uppercase + digit)
+     * Encode String(uppercase + digit) or Base64
      *
      * @param data
      * @param salt
@@ -94,7 +92,7 @@ public class MD5Util {
      * @param isBase64 true to encode into Base64, false to encode into hexadecimal
      * @return
      */
-    public static String md5(String data, String salt, String charset, boolean isBase64) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public static String md5(String data, String salt, String charset, boolean isBase64) {
         String digest = null;
         try {
             MessageDigest md = MessageDigest.getInstance(MD5);
@@ -113,7 +111,7 @@ public class MD5Util {
             }
         } catch (Exception e) {
             log.error("MD5 encode error", e);
-            throw e;
+            throw new RuntimeException(e);
         }
         assert digest != null;
         return digest.replace("\r\n", "");
