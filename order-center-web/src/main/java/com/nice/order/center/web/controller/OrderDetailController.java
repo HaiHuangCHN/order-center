@@ -24,8 +24,9 @@ public class OrderDetailController {
 
     @GetMapping(value = "/get/order/{userId}")
     public ResponseEntity<OrderDetailResVO> getOrder(@PathVariable("userId") Long userId) {
-        OrderDetailResDTO dto = orderDetailService.findOrderDetailByUserId(userId);
-        return ResponseEntity.status(HttpStatus.OK).body(ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(dto, OrderDetailResVO.class));
+        OrderDetailResDTO resDto = orderDetailService.findOrderDetailByUserId(userId);
+        OrderDetailResVO resVo = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(resDto, OrderDetailResVO.class);
+        return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 
 //    @PostMapping(value = "/new/order")
