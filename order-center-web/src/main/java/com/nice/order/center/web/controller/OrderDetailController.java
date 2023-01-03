@@ -22,7 +22,7 @@ public class OrderDetailController {
     @Autowired
     private OrderDetailService orderDetailService;
 
-    @GetMapping(value = "/get/order/{userId}")
+    @GetMapping(value = "/queryOrderByUserId/{userId}")
     public ResponseEntity<OrderDetailResVO> getOrder(@PathVariable("userId") Long userId) {
         OrderDetailResDTO resDto = orderDetailService.findOrderDetailByUserId(userId);
         OrderDetailResVO resVo = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(resDto, OrderDetailResVO.class);

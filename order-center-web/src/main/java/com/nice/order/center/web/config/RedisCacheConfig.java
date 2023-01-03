@@ -34,7 +34,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
     private Integer defaultExpireTime;
 
 //	/**
-//	 * bean definition of key generation strategypackage name + class name + method name + all arguments
+//	 * bean definition of key generation strategy = [package name + class name + method name + all arguments]
 //	 */
 //	@Bean(name = "keyGenerator")
 //	@Override
