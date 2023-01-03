@@ -48,7 +48,6 @@ public class OrderDetail extends BaseEntity implements Serializable {
      * Total amount
      */
     @Column(name = "total_amount")
-    // TODO Any problem with BigDecimal + MyBatis?
     private BigDecimal totalAmount;
 
     /**
