@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderDetailMapper /*extends Mapper<OrderDetail>*/ {
 
-    OrderDetail selectByUserId(Long id);
+    OrderDetail selectByUserNo(String userNo);
 
 }

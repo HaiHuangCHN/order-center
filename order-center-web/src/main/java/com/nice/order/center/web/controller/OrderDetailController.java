@@ -2,9 +2,7 @@ package com.nice.order.center.web.controller;
 
 import com.nice.order.center.common.util.ModelMapperUtil;
 import com.nice.order.center.service.OrderDetailService;
-import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
 import com.nice.order.center.service.dto.res.OrderDetailResDTO;
-import com.nice.order.center.web.vo.req.OrderDetailReqVO;
 import com.nice.order.center.web.vo.res.OrderDetailResVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Slf4j
 @Controller
@@ -22,9 +19,9 @@ public class OrderDetailController {
     @Autowired
     private OrderDetailService orderDetailService;
 
-    @GetMapping(value = "/queryOrderByUserId/{userId}")
-    public ResponseEntity<OrderDetailResVO> getOrder(@PathVariable("userId") Long userId) {
-        OrderDetailResDTO resDto = orderDetailService.findOrderDetailByUserId(userId);
+    @GetMapping(value = "/queryOrderByUserNo/{userNo}")
+    public ResponseEntity<OrderDetailResVO> getOrder(@PathVariable("userNo") String userNo) {
+        OrderDetailResDTO resDto = orderDetailService.queryOrderDetailByUserNo(userNo);
         OrderDetailResVO resVo = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(resDto, OrderDetailResVO.class);
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }

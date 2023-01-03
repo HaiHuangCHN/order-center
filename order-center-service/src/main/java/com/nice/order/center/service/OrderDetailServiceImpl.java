@@ -21,12 +21,12 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     private OrderDetailMapper orderDetailMapper;
 
     @Override
-    public OrderDetailResDTO findOrderDetailByUserId(Long userId) {
+    public OrderDetailResDTO queryOrderDetailByUserNo(String userNo) {
 //        Example example = MapperUtils.buildExample(OrderDetail.class, o -> o
 //                .andEqualTo(OrderDetail::getUserId, userId)
 //                .andEqualTo(OrderDetail::getYn, YesOrNoEnum.YES.getCode()));
 //        OrderDetail orderDetail = orderDetailMapper.selectOneByExample(example);
-        OrderDetail orderDetail = orderDetailMapper.selectByUserId(userId);
+        OrderDetail orderDetail = orderDetailMapper.selectByUserNo(userNo);
         return ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetail, OrderDetailResDTO.class);
     }
 

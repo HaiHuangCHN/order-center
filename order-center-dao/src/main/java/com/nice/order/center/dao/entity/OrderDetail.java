@@ -61,13 +61,12 @@ public class OrderDetail extends BaseEntity implements Serializable {
      * User No
      */
     @Column(name = "user_no")
-    private Long userNo;
+    private String userNo;
 
     /**
      * 0 - Deleted, 1 - Not Deleted
      */
     @Column(name = "yn", nullable = false)
-    // TODO Any problem with BOOLEAN + MyBatis?
     private Boolean yn;
 
 }
