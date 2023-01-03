@@ -10,8 +10,8 @@
         <result column="currency" jdbcType="CHAR" property="currency"/>
         <result column="payment_status" jdbcType="TINYINT" property="paymentStatus"/>
         <result column="user_no" jdbcType="VARCHAR" property="userNo"/>
-        <!--`yn` TINYINT UNSIGNED NOT NULL COMMENT '0 - Deleted, 1 - Not Deleted',-->
-        <!--MyBatis can support map TINYINT into BOOLEAN-->
+        <!--When `yn` BOOLEAN NOT NULL COMMENT '0 - Deleted, 1 - Not Deleted',-->
+        <!--MyBatis can support map BOOLEAN-->
         <result column="yn" jdbcType="TINYINT" property="yn"/>
         <result column="created_by" jdbcType="VARCHAR" property="createdBy"/>
         <!--MyBatis cannot support DATETIME, TODO Learn why and how to support-->
