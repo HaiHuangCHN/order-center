@@ -12,7 +12,7 @@
     <artifactId>order-center-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>Order Center Common</name>
+    <name>order-center-common</name>
     <description>Order Center Common</description>
 
     <properties>

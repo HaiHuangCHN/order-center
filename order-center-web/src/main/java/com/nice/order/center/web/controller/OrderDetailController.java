@@ -19,10 +19,11 @@ public class OrderDetailController {
     @Autowired
     private OrderDetailService orderDetailService;
 
-    @GetMapping(value = "/get/order/{userId}")
-    public ResponseEntity<OrderDetailVO> createOrder(@PathVariable("userId") Long userId) {
-        OrderDetailDTO dto = orderDetailService.findOrderDetailByUserId(userId);
-        return ResponseEntity.status(HttpStatus.OK).body(ModelMapperUtil.getModelMapperWithFieldMatching().map(dto, OrderDetailVO.class));
+    @GetMapping(value = "/queryOrderByUserNo/{userNo}")
+    public ResponseEntity<OrderDetailVO> createOrder(@PathVariable("userNo") String userNo) {
+        OrderDetailDTO resDto = orderDetailService.findOrderDetailByUserNo(userNo);
+        OrderDetailVO resVo = ModelMapperUtil.getModelMapperWithFieldMatching().map(resDto, OrderDetailVO.class);
+        return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.nice.order.center.web.vo;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -9,14 +10,17 @@ import java.time.LocalDateTime;
 /**
  * No yn filed
  */
-@Data
+@Getter
+@Setter
 public class OrderDetailVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
-    private String status;
+    private String orderNo;
+
+    private String orderStatus;
 
     private BigDecimal totalAmount;
 
@@ -24,7 +28,7 @@ public class OrderDetailVO implements Serializable {
 
     private Integer paymentStatus;
 
-    private Long userId;
+    private String userNo;
 
     private String createdBy;
 

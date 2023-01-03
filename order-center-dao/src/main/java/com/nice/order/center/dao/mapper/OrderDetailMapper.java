@@ -1,8 +1,9 @@
 package com.nice.order.center.dao.mapper;
 
-
 import com.nice.order.center.dao.entity.OrderDetail;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 //import tk.mybatis.mapper.common.Mapper;
 
 /**
@@ -19,7 +20,7 @@ import org.apache.ibatis.annotations.*;
 //        Consider defining a bean of type 'com.nice.order.center.dao.mapper.OrderDetailMapper' in your configuration.
 public interface OrderDetailMapper/* extends Mapper<OrderDetail>*/ {
 
-    @Select("SELECT * FROM order_detail WHERE id = #{id}")
+    @Select("SELECT * FROM `order_detail` WHERE `user_no` = #{userNo}")
 //// MyBatis 默认「不」开启「驼峰命名映射」，需要用下面写法进行映射，或者在 application.properties 加
 //// mybatis.configuration.mapUnderscoreToCamelCase=true
 //// 或
@@ -30,6 +31,6 @@ public interface OrderDetailMapper/* extends Mapper<OrderDetail>*/ {
 //            @Result(property = "totalAmount", column = "total_amount"),
 //            @Result(property = "paymentStatus", column = "payment_status")
 //    })
-    OrderDetail selectByUserId(@Param("id") Long id);
+    OrderDetail selectByUserNo(@Param("userNo") String userNo);
 
 }

@@ -3,10 +3,8 @@ package com.nice.order.center.service;
 import com.nice.order.center.common.util.ModelMapperUtil;
 import com.nice.order.center.dao.entity.OrderDetail;
 import com.nice.order.center.dao.mapper.OrderDetailMapper;
-//import com.nice.order.center.dao.util.MapperUtils;
 import com.nice.order.center.service.dto.OrderDetailDTO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 //import tk.mybatis.mapper.entity.Example;
@@ -14,24 +12,22 @@ import org.springframework.stereotype.Service;
 /**
  * Try no @Autowired
  */
+@Slf4j
 @Service
 public class OrderDetailServiceImpl implements OrderDetailService {
-
-    private static final Logger logger = LoggerFactory.getLogger(OrderDetailServiceImpl.class);
 
     @Autowired
     private OrderDetailMapper orderDetailMapper;
 
     @Override
-    public OrderDetailDTO findOrderDetailByUserId(Long userId) {
+    public OrderDetailDTO findOrderDetailByUserNo(String userNo) {
 //        Example example = MapperUtils.buildExample(OrderDetail.class, o -> o
-//                .andEqualTo(OrderDetail::getUserId, userId)
+//                .andEqualTo(OrderDetail::getUserNo, userNo)
 //                .andEqualTo(OrderDetail::getYn, (byte)1));
 //        OrderDetail existingRecord = orderDetailMapper.selectOneByExample(example);
 //        return ModelMapperUtil.getModelMapperWithFieldMatching().map(existingRecord, OrderDetailDTO.class);
-        OrderDetail existingRecord = orderDetailMapper.selectByUserId(userId);
+        OrderDetail existingRecord = orderDetailMapper.selectByUserNo(userNo);
         return ModelMapperUtil.getModelMapperWithFieldMatching().map(existingRecord, OrderDetailDTO.class);
     }
-
 
 }
