@@ -70,5 +70,4 @@ public class OrderDetail extends BaseEntity implements Serializable {
     // TODO Any problem with BOOLEAN + MyBatis?
     private Boolean yn;
 
-
 }
