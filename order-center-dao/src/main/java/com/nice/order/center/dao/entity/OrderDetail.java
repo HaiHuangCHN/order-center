@@ -15,46 +15,53 @@ import java.math.BigDecimal;
 @Setter
 public class OrderDetail extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = -8288940243687399622L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * Unique ID for each record in the table
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    /**
+     * Order No
+     */
+    @Column(name = "order_no")
+    private String orderNo;
 
     /**
      * Status of an order
      */
-    @Column(name = "status", nullable = false)
+    @Column(name = "order_status")
     // TODO To learn more
     @Enumerated(value = EnumType.STRING)
-    private OrderDetailStatusEnum status;
+    private OrderDetailStatusEnum orderStatus;
 
     /**
      * Total amount
      */
-    @Column(name = "total_amount", nullable = false)
+    @Column(name = "total_amount")
     // TODO Any problem with BigDecimal + MyBatis?
     private BigDecimal totalAmount;
 
     /**
      * Currency
      */
-    @Column(name = "currency", nullable = false)
+    @Column(name = "currency")
     private String currency;
 
     /**
-     * Payment status, 0 - OPEN, 1 - PAYING, 2 - SUCCESS, -1 - Fail
+     * Payment status. 0 - NOT_PAID, 1 - PAYING, 2 - PAID, 3 - REFUNDING, 4 - REFUNDED, -1 - PAID_Fail
      */
     @Column(name = "payment_status")
     private Integer paymentStatus;
 
     /**
-     * Associated key
+     * User No
      */
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+    @Column(name = "user_no")
+    private Long userNo;
 
     /**
      * 0 - Deleted, 1 - Not Deleted
