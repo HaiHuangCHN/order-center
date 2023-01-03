@@ -10,29 +10,28 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public class BaseEntity {
 
-
     /**
      * Created by who
      */
-    @Column(name = "created_by", nullable = false)
+    @Column(name = "created_by")
     private String createdBy;
 
     /**
      * Record created date and time
      */
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     /**
      * Updated by who
      */
-    @Column(name = "updated_by", nullable = false)
+    @Column(name = "updated_by")
     private String updatedBy;
 
     /**
      * Record last updated date and time
      */
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     public String getCreatedBy() {
@@ -66,6 +65,5 @@ public class BaseEntity {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
-
 
 }

@@ -26,7 +26,7 @@ public interface OrderDetailMapper/* extends Mapper<OrderDetail>*/ {
 //// mybatis.configuration.map-underscore-to-camel-case=true
 //// https://blog.csdn.net/liu_sisi/article/details/88360155
 //    @Results(value = {
-//            @Result(property = "id", column = "ID"),
+//            @Result(property = "id", column = "id"),
 //            @Result(property = "totalAmount", column = "total_amount"),
 //            @Result(property = "paymentStatus", column = "payment_status")
 //    })

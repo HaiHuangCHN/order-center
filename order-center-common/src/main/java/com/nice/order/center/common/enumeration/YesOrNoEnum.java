@@ -2,14 +2,13 @@ package com.nice.order.center.common.enumeration;
 
 public enum YesOrNoEnum {
 
-
     YES(1, "是"),
 
     NO(0, "否");
 
-    private Integer code;
+    private final Integer code;
 
-    private String remark;
+    private final String remark;
 
     public Integer getCode() {
         return this.code;
@@ -23,6 +22,5 @@ public enum YesOrNoEnum {
         this.code = code;
         this.remark = remark;
     }
-
 
 }
