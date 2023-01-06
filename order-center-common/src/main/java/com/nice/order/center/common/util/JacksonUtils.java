@@ -6,10 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
- * TODO
- *
  * JSON实用类（选型Jackson）
  */
 public class JacksonUtils {
@@ -65,5 +64,18 @@ public class JacksonUtils {
         }
     }
 
+    public static <T> T jsonToObjectWithCustomObjectMapper(String json, Class<T> clazz, ObjectMapper ob) {
+        if (json == null) {
+            return null;
+        }
+
+        Objects.requireNonNull(ob);
+
+        try {
+            return (T) ob.readValue(json, clazz);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
