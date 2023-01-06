@@ -2,6 +2,8 @@ package com.nice.order.center.service;
 
 import com.nice.order.center.common.constant.Constants;
 import com.nice.order.center.common.enumeration.YesOrNoEnum;
+import com.nice.order.center.common.exception.ErrorCode;
+import com.nice.order.center.common.util.DbEffectUtils;
 import com.nice.order.center.common.util.JacksonUtils;
 import com.nice.order.center.common.util.ModelMapperUtil;
 import com.nice.order.center.dao.entity.OrderDetail;
@@ -43,19 +45,18 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     // TODO andAllEqualTo(Object param), fields with null considered as condition?
 
     @Override
-    public String addNewOrder(OrderDetailReqDTO orderDetailReqDTO) {
-        OrderDetail orderDetail = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqDTO, OrderDetail.class);
+    public boolean addNewOrder(OrderDetailReqDTO orderDetailReqDto) {
+        OrderDetail orderDetail = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqDto, OrderDetail.class);
+        orderDetail.setOrderNo();
         orderDetail.setYn(YesOrNoEnum.YES.getCode());
         orderDetail.setCreatedBy(Constants.SYSTEM);
         orderDetail.setCreatedAt(LocalDateTime.now());
+        orderDetail.setUpdatedBy(Constants.SYSTEM);
+        orderDetail.setUpdatedAt(LocalDateTime.now());
         // orderDetailMapper.insert() 可以返回自增 ID
-        boolean updateN = orderDetailMapper.insert(orderDetail) == 1;
-        log.info("测试返回 orderDetail： {}", JacksonUtils.objectToJsonCamel(orderDetail));
-        if (!updateN) {
-            // TODO
-        }
-        // TODO
-        return "A";
+        int effectedCount = orderDetailMapper.insert(orderDetail);
+        DbEffectUtils.checkEffect(effectedCount != 1, ErrorCode.GENERAL_BUSINESS_ERROR.GENERAL_BUSINESS_ERROR_CODE);
+        return true;
     }
 
 }

@@ -7,6 +7,6 @@ public interface OrderDetailService {
 
     OrderDetailResDTO findOrderDetailByUserNo(String userNo);
 
-    String addNewOrder(OrderDetailReqDTO orderDetailReqDTO);
+    boolean addNewOrder(OrderDetailReqDTO orderDetailReqDTO);
 
 }

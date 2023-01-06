@@ -1,14 +1,14 @@
 package com.nice.order.center.service.dto.req;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 public class OrderDetailReqDTO implements Serializable {
-
 
     private static final long serialVersionUID = 1L;
 
@@ -16,11 +16,10 @@ public class OrderDetailReqDTO implements Serializable {
 
     private String currency;
 
-    private Long userId;
+    private String userNo;
 
     private String createdBy;
 
     private String updatedBy;
-
 
 }

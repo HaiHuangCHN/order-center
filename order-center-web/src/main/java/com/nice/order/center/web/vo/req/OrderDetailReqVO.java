@@ -17,6 +17,6 @@ public class OrderDetailReqVO implements Serializable {
 
     private String currency;
 
-    private Long userId;
+    private String userNo;
 
 }

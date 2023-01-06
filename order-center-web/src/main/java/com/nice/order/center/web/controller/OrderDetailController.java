@@ -6,26 +6,27 @@ import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
 import com.nice.order.center.service.dto.res.OrderDetailResDTO;
 import com.nice.order.center.web.vo.req.OrderDetailReqVO;
 import com.nice.order.center.web.vo.res.OrderDetailResVO;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
+@RequestMapping("/order")
 public class OrderDetailController {
 
-    @Autowired
-    private OrderDetailService orderDetailService;
+    private final OrderDetailService orderDetailService;
 
-    @GetMapping(value = "/queryOrderByUserNo/{userNo}")
+    @GetMapping(value = "/queryByUserNo/{userNo}")
     public ResponseEntity<OrderDetailResVO> getOrder(HttpServletRequest request,
                                                      @PathVariable("userNo") String userNo) {
         log.info("servletPath：{}", request.getServletPath());
@@ -36,7 +37,7 @@ public class OrderDetailController {
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 
-    @PostMapping(value = "/create/order")
+    @PostMapping(value = "order/create")
     public ResponseEntity<String> createOrder(OrderDetailReqVO orderDetailReqVO) {
         OrderDetailReqDTO orderDetailReqDto = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqVO,
                 OrderDetailReqDTO.class);
