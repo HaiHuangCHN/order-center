@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * Redisson自定义配置
  */
 @Component
-public class BosAdminRedissonAutoConfigurationCustomizer implements RedissonAutoConfigurationCustomizer {
+public class CustomRedissonAutoConfigurationCustomizer implements RedissonAutoConfigurationCustomizer {
 
     /**
      * 从节点最小空闲连接数
