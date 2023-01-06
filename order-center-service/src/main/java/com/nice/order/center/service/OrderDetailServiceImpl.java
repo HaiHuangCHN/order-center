@@ -1,6 +1,5 @@
 package com.nice.order.center.service;
 
-import com.nice.order.center.common.constant.Constants;
 import com.nice.order.center.common.enumeration.YesOrNoEnum;
 import com.nice.order.center.common.exception.ErrorCode;
 import com.nice.order.center.common.util.DbEffectUtils;
@@ -14,7 +13,6 @@ import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
 import com.nice.order.center.service.dto.res.OrderDetailResDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -35,6 +33,36 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
     private final OrderDetailMapper orderDetailMapper;
 
+    /**
+     * selectByPrimaryKey, if not pass primary key, will be something like this:
+     * ==>  Preparing: SELECT created_by,created_at,updated_by,updated_at,id,order_no,order_status,total_amount,
+     * currency,payment_status,user_no,yn FROM order_detail WHERE id = ?
+     * ==> Parameters: null
+     * <==      Total: 0
+     * <p>
+     * existsWithPrimaryKey
+     * ==> Parameters: null
+     * <==      Total: 1
+     * <p>
+     * andAllEqualTo(Object param), fields with null considered as condition? Yes!
+     * Example example = new Example(OrderDetail.class);
+     * Example.Criteria criteria = example.createCriteria();
+     * OrderDetail condition = new OrderDetail();
+     * condition.setId(1L);
+     * criteria.andAllEqualTo(condition);
+     * log.info(JacksonUtils.objectToJsonCamel(orderDetailMapper.selectByExample(example)));
+     * return ModelMapperUtil.getModelMapperWithFieldMatching().map(null, OrderDetailResDTO.class);
+     * <p>
+     * ==>  Preparing: SELECT created_by,created_at,updated_by,updated_at,id,order_no,order_status,total_amount,
+     * currency,payment_status,user_no,yn FROM order_detail WHERE ( ( total_amount is null and created_at is null and
+     * updated_by is null and order_no is null and created_by is null and yn is null and user_no is null and
+     * order_status is null and currency is null and id = ? and payment_status is null and updated_at is null ) )
+     * ==> Parameters: 1(Long)
+     * <==      Total: 0
+     *
+     * @param userNo
+     * @return
+     */
     @Override
     public OrderDetailResDTO findOrderDetailByUserNo(String userNo) {
         Example example = MapperUtils.buildExample(OrderDetail.class, o -> o
@@ -44,16 +72,13 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         return ModelMapperUtil.getModelMapperWithFieldMatching().map(existingRecord, OrderDetailResDTO.class);
     }
 
-    // TODO Try orderDetailMapper.insert(); see if the SQL with id column, if has id column, then pass an id that is
-    //  existed in DB, see if duplicated, if id not existed in DB?
-    // TODO Try selectByPrimaryKey, see if not pass primary key?
-    // TODO Try existsWithPrimaryKey
-    // TODO Try updateByPrimaryKey, see if not pass primary key?
-    // TODO andAllEqualTo(Object param), fields with null considered as condition?
-
     @Override
     public boolean addNewOrder(OrderDetailReqDTO orderDetailReqDto) {
         OrderDetail orderDetail = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqDto, OrderDetail.class);
+        // If pass an id that is existed in DB, will get java.sql.SQLIntegrityConstraintViolationException: Duplicate
+        // entry 'id' for key 'order_detail.PRIMARY'
+        // if id not existed in DB, then successfully
+        // orderDetail.setId(5L);
         orderDetail.setOrderNo(String.valueOf(SNOW_FLAKE.nextId()));
         orderDetail.setOrderStatus(OrderDetailStatusEnum.DRAFT);
         orderDetail.setPaymentStatus(0);
@@ -64,7 +89,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         orderDetail.setUpdatedAt(LocalDateTime.now());
         // orderDetailMapper.insert() 可以返回自增 ID
         int effectedCount = orderDetailMapper.insert(orderDetail);
-        DbEffectUtils.checkEffect(effectedCount != 1, ErrorCode.GENERAL_BUSINESS_ERROR.GENERAL_BUSINESS_ERROR_CODE);
+        DbEffectUtils.checkEffect(effectedCount == 1, ErrorCode.GENERAL_BUSINESS_ERROR.GENERAL_BUSINESS_ERROR_CODE);
         return true;
     }
 

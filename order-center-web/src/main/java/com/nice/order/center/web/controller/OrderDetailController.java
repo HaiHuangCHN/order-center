@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +43,7 @@ public class OrderDetailController {
 
     // TODO Get the user from session instead of parameter
     @PostMapping(value = "order/create")
-    public ResponseEntity<Boolean> createOrder(OrderDetailReqVO orderDetailReqVO) {
+    public ResponseEntity<Boolean> createOrder(@RequestBody OrderDetailReqVO orderDetailReqVO) {
         OrderDetailReqDTO orderDetailReqDto = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqVO,
                 OrderDetailReqDTO.class);
         boolean result = orderDetailService.addNewOrder(orderDetailReqDto);
