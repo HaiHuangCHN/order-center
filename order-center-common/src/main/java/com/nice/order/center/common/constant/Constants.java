@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 /**
  * 常量类
  *
- * @author haihuang95@zto.com
+ * @author hai.huang.a@outlook.com
  * @date 2022/1/19 21:51
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

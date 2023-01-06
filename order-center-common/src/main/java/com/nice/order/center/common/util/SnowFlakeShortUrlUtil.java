@@ -8,12 +8,12 @@ import org.springframework.util.Assert;
 /**
  * Twitter 的 SnowFlake算法，使用SnowFlake算法生成一个整数
  *
- * @author haihuang95@zto.com
+ * @author hai.huang.a@outlook.com
  * @date 2022/6/23 23:56
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class SnowFlakeShortUrl {
+public final class SnowFlakeShortUrlUtil {
 
     /* 起始的时间戳 */
     private static final long START_TIMESTAMP = 1624698370256L;
@@ -72,7 +72,7 @@ public final class SnowFlakeShortUrl {
      * @param dataCenterId
      * @param machineId
      */
-    public SnowFlakeShortUrl(long dataCenterId, long machineId) {
+    public SnowFlakeShortUrlUtil(long dataCenterId, long machineId) {
         Assert.isTrue(dataCenterId >= 0 && dataCenterId <= MAX_DATA_CENTER_NUM, "dataCenterId is illegal!");
         Assert.isTrue(machineId >= 0 || machineId <= MAX_MACHINE_NUM, "machineId is illegal!");
         this.dataCenterId = dataCenterId;

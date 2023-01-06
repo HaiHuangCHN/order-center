@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * <p>
  * 任务队列无界，使用时请注意任务堆积
  *
- * @author haihuang95@zto.com
+ * @author hai.huang.a@outlook.com
  * @date 2022/1/19 21:51
  */
 @Slf4j

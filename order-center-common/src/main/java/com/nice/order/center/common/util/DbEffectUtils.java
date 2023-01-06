@@ -9,7 +9,7 @@ import com.nice.order.center.common.exception.IErrorCode;
  *
  * <p>注意使用在能够正常处理{@link BusinessException}的地方</p>
  *
- * @author haihuang95@zto.com
+ * @author hai.huang.a@outlook.com
  * @date 2023/1/6 13:17
  */
 public final class DbEffectUtils {

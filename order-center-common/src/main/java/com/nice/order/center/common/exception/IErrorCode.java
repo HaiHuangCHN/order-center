@@ -3,7 +3,7 @@ package com.nice.order.center.common.exception;
 /**
  * 错误码
  *
- * @author haihuang95@zto.com
+ * @author hai.huang.a@outlook.com
  * @date 2023/1/6 13:17
  */
 public interface IErrorCode {

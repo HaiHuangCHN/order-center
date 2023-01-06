@@ -21,7 +21,7 @@ import java.util.Base64;
  *
  * TODO 偏移变量/设置向量，这个是啥？
  *
- * @author haihuang95@zto.com
+ * @author hai.huang.a@outlook.com
  * @date 2021/10/10 23:56
  */
 @Deprecated

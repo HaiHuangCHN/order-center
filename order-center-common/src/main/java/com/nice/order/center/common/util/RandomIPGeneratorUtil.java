@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * 随机IP生成器
  *
- * @author haihuang95@zto.com
+ * @author hai.huang.a@outlook.com
  * @date 2022/9/18 19:19
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

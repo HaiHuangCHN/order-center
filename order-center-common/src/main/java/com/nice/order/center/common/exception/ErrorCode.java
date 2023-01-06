@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * 错误码
  *
- * @author haihuang95@zto.com
+ * @author hai.huang.a@outlook.com
  * @date 2023/1/6 13:17
  */
 @Slf4j
