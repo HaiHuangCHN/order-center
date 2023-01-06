@@ -6,7 +6,6 @@ import com.nice.order.center.common.util.DbEffectUtils;
 import com.nice.order.center.common.util.ModelMapperUtil;
 import com.nice.order.center.common.util.SnowFlakeShortUrlUtil;
 import com.nice.order.center.dao.entity.OrderDetail;
-import com.nice.order.center.dao.entity.OrderDetailStatusEnum;
 import com.nice.order.center.dao.mapper.OrderDetailMapper;
 import com.nice.order.center.dao.util.MapperUtils;
 import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
@@ -80,7 +79,6 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         // if id not existed in DB, then successfully
         // orderDetail.setId(5L);
         orderDetail.setOrderNo(String.valueOf(SNOW_FLAKE.nextId()));
-        orderDetail.setOrderStatus(OrderDetailStatusEnum.DRAFT);
         orderDetail.setPaymentStatus(0);
         orderDetail.setYn(YesOrNoEnum.YES.getCode());
         orderDetail.setCreatedBy(orderDetailReqDto.getUserNo());
@@ -88,7 +86,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         orderDetail.setUpdatedBy(orderDetailReqDto.getUserNo());
         orderDetail.setUpdatedAt(LocalDateTime.now());
         // orderDetailMapper.insert() 可以返回自增 ID
-        int effectedCount = orderDetailMapper.insert(orderDetail);
+        int effectedCount = orderDetailMapper.insertSelective(orderDetail);
         DbEffectUtils.checkEffect(effectedCount == 1, ErrorCode.GENERAL_BUSINESS_ERROR.GENERAL_BUSINESS_ERROR_CODE);
         return true;
     }
