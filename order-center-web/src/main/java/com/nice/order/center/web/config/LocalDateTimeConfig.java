@@ -1,4 +1,4 @@
-package com.zto.intl.bos.admin.config;
+package com.nice.order.center.web.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

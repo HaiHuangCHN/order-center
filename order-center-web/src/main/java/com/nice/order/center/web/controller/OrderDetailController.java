@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 
 @Slf4j
 @Controller
@@ -29,6 +30,8 @@ public class OrderDetailController {
     @GetMapping(value = "/queryByUserNo/{userNo}")
     public ResponseEntity<OrderDetailResVO> getOrder(HttpServletRequest request,
                                                      @PathVariable("userNo") String userNo) {
+        log.info("请求时间[{}]，接口URL[{}]，接口方法[{}]，调用结果[{}]，执行时间[{}]", LocalDateTime.now(), "", "", "", "");
+        log.info("请求时间[{}]，接口URL[{}]，接口方法[{}]，调用结果[{}]，执行时间[{}]", LocalDateTime.now(), "", "", "", "");
         log.info("servletPath：{}", request.getServletPath());
         log.info("userId：{}", request.getParameter("userNo"));
         log.info("arbitrary：{}", request.getParameter("arbitrary"));
@@ -37,13 +40,13 @@ public class OrderDetailController {
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 
+    // TODO Get the user from session instead of parameter
     @PostMapping(value = "order/create")
-    public ResponseEntity<String> createOrder(OrderDetailReqVO orderDetailReqVO) {
+    public ResponseEntity<Boolean> createOrder(OrderDetailReqVO orderDetailReqVO) {
         OrderDetailReqDTO orderDetailReqDto = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqVO,
                 OrderDetailReqDTO.class);
-        // TODO Get the user from session instead of hard code
-        String orderId = orderDetailService.addNewOrder(orderDetailReqDto);
-        return ResponseEntity.status(HttpStatus.OK).body(orderId);
+        boolean result = orderDetailService.addNewOrder(orderDetailReqDto);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
 }

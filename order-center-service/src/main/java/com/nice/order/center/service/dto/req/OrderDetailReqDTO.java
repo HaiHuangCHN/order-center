@@ -18,8 +18,4 @@ public class OrderDetailReqDTO implements Serializable {
 
     private String userNo;
 
-    private String createdBy;
-
-    private String updatedBy;
-
 }
