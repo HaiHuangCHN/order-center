@@ -27,4 +27,10 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         return ModelMapperUtil.getModelMapperWithFieldMatching().map(existingRecord, OrderDetailDTO.class);
     }
 
+    // TODO Try orderDetailMapper.insert(); see if the SQL with id column, if has id column, then pass an id that is existed in DB, see if duplicated, if id not existed in DB?
+    // TODO Try selectByPrimaryKey, see if not pass primary key?
+    // TODO Try existsWithPrimaryKey
+    // TODO Try updateByPrimaryKey, see if not pass primary key?
+    // TODO andAllEqualTo(Object param), fields with null considered as condition?
+
 }
