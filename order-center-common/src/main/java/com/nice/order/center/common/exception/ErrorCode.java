@@ -69,9 +69,14 @@ public class ErrorCode {
         NOT_REGISTERED_ERROR_CODE("-90", "not.registered.error.code"),
 
         /**
+         * 内部中断
+         */
+        INTERNAL_INTERRUPTED("-51", "internal.interrupted"),
+
+        /**
          * 并发锁异常
          */
-        CONCURRENT_ORDER_ERROR("-50", "concurrent.order.error"),
+        CONCURRENT_ERROR("-50", "concurrent.error"),
 
         /**
          * 系统内部错误

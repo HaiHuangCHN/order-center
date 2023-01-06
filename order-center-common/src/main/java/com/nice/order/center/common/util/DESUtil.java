@@ -38,8 +38,6 @@ public class DESUtil {
      * 偏移变量，固定占8位字节
      * <p>
      * 设置向量，略去
-     * <p>
-     * 注：ZTO内部使用
      */
     private static final byte[] DES_IV = {0x12, 0x34, 0x56, 0x78, (byte)0x90, (byte)0xAB, (byte)0xCD, (byte)0xEF};
 

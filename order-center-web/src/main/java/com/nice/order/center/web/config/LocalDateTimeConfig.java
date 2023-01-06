@@ -18,7 +18,7 @@ import java.util.Locale;
 /**
  * TODO 解决 Jackson 序列化JDK8时间问题。这种解决方式要求序列化和被序列化的对象要有无参构造器。。。是最优解吗？这种解决方式性能怎样？
  *
- * @author haihuang95@zto.com
+ * @author hai.huang.a@outlook.com
  * @date 2022/10/19 17:52
  */
 @Configuration

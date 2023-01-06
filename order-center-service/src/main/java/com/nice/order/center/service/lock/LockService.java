@@ -22,7 +22,8 @@ public interface LockService {
      * @author hai.huang.a@outlook.com
      * @date 2023/1/6 13:17
      */
-    void run(String key, Runnable r, long waitTime, long leaseTime, TimeUnit timeUnit);
+    void run(String key, Runnable r,
+             long waitTime, long leaseTime, TimeUnit timeUnit);
 
     /**
      * 有返回值运行
@@ -35,6 +36,7 @@ public interface LockService {
      * @author hai.huang.a@outlook.com
      * @date 2023/1/6 13:17
      */
-    <T> T run(String key, Supplier<T> s, long waitTime, long leaseTime, TimeUnit timeUnit);
+    <T> T run(String key, Supplier<T> s,
+              long waitTime, long leaseTime, TimeUnit timeUnit);
 
 }

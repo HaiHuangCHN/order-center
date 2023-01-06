@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @author haihuang95@zto.com
+ * @author hai.huang.a@outlook.com
  * @date 2022/3/24 17:36
  * @deprecated 仅供测试使用
  */
