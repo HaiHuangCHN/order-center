@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * TODO Fill in desc
+ * 常量类
  *
  * @author haihuang95@zto.com
  * @date 2022/1/19 21:51

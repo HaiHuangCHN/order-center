@@ -9,11 +9,8 @@ import java.util.function.Function;
 
 /**
  * Mapper Util
- *
- * TODO Learn more
  */
 public final class MapperUtils {
-
 
     private MapperUtils() {
         throw new IllegalStateException("utility class...");
@@ -39,6 +36,5 @@ public final class MapperUtils {
     public static <T, R> String getFieldName(Fn<T, R> fn) {
         return Reflections.fnToFieldName(fn);
     }
-
 
 }

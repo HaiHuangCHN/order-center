@@ -5,10 +5,8 @@ import com.nice.order.center.service.dto.res.OrderDetailResDTO;
 
 public interface OrderDetailService {
 
-
-    OrderDetailResDTO findOrderDetailByUserId(Long userId);
+    OrderDetailResDTO findOrderDetailByUserNo(String userNo);
 
     String addNewOrder(OrderDetailReqDTO orderDetailReqDTO);
-
 
 }
