@@ -36,7 +36,7 @@ public class OrderDetailController {
         log.info("servletPath：{}", request.getServletPath());
         log.info("userId：{}", request.getParameter("userNo"));
         log.info("arbitrary：{}", request.getParameter("arbitrary"));
-        OrderDetailResDTO resDto = orderDetailService.findOrderDetailByUserNo(userNo);
+        OrderDetailResDTO resDto = orderDetailService.findOrderDetailByUserNoWithCache(userNo);
         OrderDetailResVO resVo = ModelMapperUtil.getModelMapperWithFieldMatching().map(resDto, OrderDetailResVO.class);
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }

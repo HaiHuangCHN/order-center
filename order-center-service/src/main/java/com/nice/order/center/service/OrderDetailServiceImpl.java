@@ -12,6 +12,7 @@ import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
 import com.nice.order.center.service.dto.res.OrderDetailResDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -64,6 +65,26 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      */
     @Override
     public OrderDetailResDTO findOrderDetailByUserNo(String userNo) {
+        Example example = MapperUtils.buildExample(OrderDetail.class, o -> o
+                .andEqualTo(OrderDetail::getUserNo, userNo)
+                .andEqualTo(OrderDetail::getYn, YesOrNoEnum.YES.getCode()));
+        OrderDetail existingRecord = orderDetailMapper.selectOneByExample(example);
+        return ModelMapperUtil.getModelMapperWithFieldMatching().map(existingRecord, OrderDetailResDTO.class);
+    }
+
+    /**
+     * @Cacheable(cacheNames = "orders", key = "'userNo'")
+     * 'userNo' = this is to use a consistent key for the cache
+     *
+     * @Cacheable(cacheNames = "orders", key = "#userNo")
+     * #userNo = this is to use SpEL Expression to specify the key
+     *
+     * @param userNo
+     * @return
+     */
+    @Override
+    @Cacheable(cacheNames = "orders", key = "#userNo")
+    public OrderDetailResDTO findOrderDetailByUserNoWithCache(String userNo) {
         Example example = MapperUtils.buildExample(OrderDetail.class, o -> o
                 .andEqualTo(OrderDetail::getUserNo, userNo)
                 .andEqualTo(OrderDetail::getYn, YesOrNoEnum.YES.getCode()));

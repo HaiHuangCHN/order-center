@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.DecimalFormat;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -50,11 +51,11 @@ public class RedisController {
         ExecutorService pool = Executors.newFixedThreadPool(100);
         for (int i = 0; i < 100; i++) {
             pool.submit(() -> {
-                // TODO 两个 for loop，为何得到递增的只是 100，而不是 100 * 10 = 1000？
+                // TODO 两个 for loop，为何得到递增的只是 100，而不是 100 * 10 = 1000？学一下 Future 的使用
                 // 配额码原子变量值增加，每次增加1
                 for (int j = 0; j < 10; j++) {
                     long count = redisCount.incrementAndGet();
-                    System.out.println(DECIMAL_FORMAT.format(String.valueOf(count)));
+                    log.info(DECIMAL_FORMAT.format(String.valueOf(count)));
                 }
             });
         }
@@ -68,5 +69,14 @@ public class RedisController {
 
         return redisCount;
     }
+
+    @GetMapping("/testRedisExpiration")
+    @ResponseBody
+    public Boolean testRedisExpiration() {
+        stringRedisTemplate.opsForValue().set("testKey", "testValue");
+//        stringRedisTemplate.opsForValue().set("testKey", "testValue", Duration.ofSeconds(3L));
+        return true;
+    }
+
 
 }

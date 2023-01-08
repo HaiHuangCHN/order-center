@@ -1,11 +1,11 @@
 server:
   port: 8080
 
-# MyBatis won't check DB connection during start up
 spring:
   application:
     name: order-center
 
+  # MyBatis won't check DB connection during start up
   datasource:
     username: order_center_admin
     password: jy199510
@@ -24,18 +24,19 @@ spring:
     port: 6379
     # Redis database index
     database: 0
-    # Connection pool max connection number (use negative number to indicate no limit)
+    #  lettuce connection config
     lettuce:
       pool:
         max-active: 8
-        # Connection pool max block waiting time(millisecond)
-        max-wait: -1
-        # Connection pool max unused time
+        max-wait: PT10S
         max-idle: 8
-        # Connection pool min unused time
         min-idle: 0
-        # Connection timeout(millisecond)
-        timeout: 5000
+
+# Redisson配置
+redisson:
+  slaveConnectionMinimumIdleSize: 1
+  masterConnectionMinimumIdleSize: 1
+  idleConnectionTimeout: 15000
 
 # Cache related config
 cache:
@@ -44,8 +45,10 @@ cache:
 
 # MyBatis
 mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
-  type-aliases-package: com.nice.order.center.dao.entity
+  #  mapper-locations: classpath:mapper/*Mapper.xml
+  #  type-aliases-package: com.nice.order.center.dao.entity
+  configuration:
+    map-underscore-to-camel-case: true
 
 # Show SQL of MyBatis
 logging:

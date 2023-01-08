@@ -7,6 +7,8 @@ public interface OrderDetailService {
 
     OrderDetailResDTO findOrderDetailByUserNo(String userNo);
 
+    OrderDetailResDTO findOrderDetailByUserNoWithCache(String userNo);
+
     boolean addNewOrder(OrderDetailReqDTO orderDetailReqDTO);
 
 }
