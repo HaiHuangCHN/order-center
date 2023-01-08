@@ -30,7 +30,13 @@ import java.time.Duration;
 @Configuration
 public class RedisConfig extends CachingConfigurerSupport {
 
+    private final RedisConnectionFactory redisConnectionFactory;
+
     private Integer defaultExpireTime;
+
+    public RedisConfig(RedisConnectionFactory redisConnectionFactory) {
+        this.redisConnectionFactory = redisConnectionFactory;
+    }
 
     public Integer getDefaultExpireTime() {
         return defaultExpireTime;
@@ -46,11 +52,11 @@ public class RedisConfig extends CachingConfigurerSupport {
      * If introduce Redisson, then will use RedissonConnectionFactory
      * or will use LettuceConnectionFactory by default
      *
-     * @param redisConnectionFactory
      * @return
      */
     @Bean
-    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+    @Override
+    public CacheManager cacheManager() {
         RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig();
         // Set default expiration time
         defaultCacheConfig = defaultCacheConfig.entryTtl(Duration.ofSeconds(defaultExpireTime))
@@ -67,6 +73,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * <p>
      * Will take effect when use @Cacheable without specify key
      */
+    @Bean
     @Override
     public KeyGenerator keyGenerator() {
         return (target, method, params) -> {
@@ -85,11 +92,10 @@ public class RedisConfig extends CachingConfigurerSupport {
      * <p>
      * TODO 原有的配置是咋样的？
      *
-     * @param redisConnectionFactory
      * @return
      */
     @Bean
-    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+    public StringRedisTemplate stringRedisTemplate() {
         StringRedisTemplate stringRedisTemplate = new StringRedisTemplate(redisConnectionFactory);
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer =
                 new Jackson2JsonRedisSerializer<>(Object.class);
@@ -108,11 +114,10 @@ public class RedisConfig extends CachingConfigurerSupport {
      * <p>
      * TODO 原有的配置是咋样的？
      *
-     * @param redisConnectionFactory
      * @return
      */
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+    public RedisTemplate<String, Object> redisTemplate() {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
 
@@ -131,24 +136,10 @@ public class RedisConfig extends CachingConfigurerSupport {
         return redisTemplate;
     }
 
-    @Value("${spring.redis.database:0}")
-    private Integer dbIndex;
-
-//    private final String TOPIC = "__keyevent@" + dbIndex + "__:expired";
-
-    private final RedisConnectionFactory redisConnectionFactory;
-
-    public RedisConfig(RedisConnectionFactory redisConnectionFactory) {
-        this.redisConnectionFactory = redisConnectionFactory;
-    }
-
     @Bean
     public RedisMessageListenerContainer redisMessageListenerContainer() {
         RedisMessageListenerContainer redisMessageListenerContainer = new RedisMessageListenerContainer();
         redisMessageListenerContainer.setConnectionFactory(redisConnectionFactory);
-        // keyevent事件，事件以__keyevent@<db>__为前缀进行发布
-        // db为redis第几个库 db2...
-//        redisMessageListenerContainer.addMessageListener(redisKeyExpirationListener, new PatternTopic(TOPIC));
         return redisMessageListenerContainer;
     }
 

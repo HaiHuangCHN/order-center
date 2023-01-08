@@ -1,4 +1,4 @@
-package com.nice.order.center.service.redis;
+package com.nice.order.center.service.redis.deplay.queue;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.Message;
@@ -24,12 +24,13 @@ public class RedisKeyExpirationListener extends KeyExpirationEventMessageListene
     public void onMessage(Message message, byte[] pattern) {
         // Get the expired key
         String expiredKey = message.toString();
-        log.info("expiredKey={}", expiredKey);
+        log.info("Start handling expiredKey={}", expiredKey);
         try {
             // do something with the expiredKey
         } catch (Exception exception) {
             log.error("Exception occurs when handle expiredKey=" + expiredKey, exception);
         }
+        log.info("End handling expiredKey={}", expiredKey);
     }
 
 }
