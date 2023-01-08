@@ -1,11 +1,11 @@
 server:
   port: 8080
 
-# MyBatis won't check DB connection during start up
 spring:
   application:
     name: order-center
 
+  # MyBatis won't check DB connection during start up
   datasource:
     username: order_center_admin
     password: jy199510
@@ -36,6 +36,12 @@ spring:
         min-idle: 0
         # Connection timeout(millisecond)
         timeout: 5000
+
+# Redisson配置
+redisson:
+  slaveConnectionMinimumIdleSize: 1
+  masterConnectionMinimumIdleSize: 1
+  idleConnectionTimeout: 15000
 
 # Cache related config
 cache:
