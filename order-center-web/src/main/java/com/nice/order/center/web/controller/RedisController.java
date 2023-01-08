@@ -19,6 +19,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
+ * Redis Controller
+ *
  * @author hai.huang.a@outlook.com
  * @date 2022/3/24 17:36
  * @deprecated 仅供测试使用
@@ -31,7 +33,7 @@ public class RedisController {
 
     private final StringRedisTemplate stringRedisTemplate;
 
-    DecimalFormat decimalFormat = new DecimalFormat("0000");
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0000");
 
     @GetMapping("/testRedisAtomicInteger")
     @ResponseBody
@@ -39,8 +41,7 @@ public class RedisController {
 
         String ticketName = "testRedisAtomicInteger";
 
-        RedisAtomicLong redisCount = new RedisAtomicLong(ticketName,
-                Objects.requireNonNull(stringRedisTemplate.getConnectionFactory()));
+        RedisAtomicLong redisCount = new RedisAtomicLong(ticketName, Objects.requireNonNull(stringRedisTemplate.getConnectionFactory()));
 
         // 用来设置初始值
         // redisCount.set(150);
@@ -53,13 +54,16 @@ public class RedisController {
                 // 配额码原子变量值增加，每次增加1
                 for (int j = 0; j < 10; j++) {
                     long count = redisCount.incrementAndGet();
-                    System.out.println(decimalFormat.format(String.valueOf(count)));
+                    System.out.println(DECIMAL_FORMAT.format(String.valueOf(count)));
                 }
             });
         }
+
         Date expireAt = LocalDateTimeUtil.convertToDate(LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(0,
                 0, 0, 0)));
+
         log.info("expireAt：{}", expireAt);
+
         redisCount.expireAt(expireAt);
 
         return redisCount;
