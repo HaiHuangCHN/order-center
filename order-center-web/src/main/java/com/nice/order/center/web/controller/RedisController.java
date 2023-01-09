@@ -1,13 +1,9 @@
 package com.nice.order.center.web.controller;
 
-import com.nice.order.center.common.constant.Constants;
 import com.nice.order.center.common.util.LocalDateTimeUtil;
-import com.nice.order.center.service.redis.deplay.queue.redisson.RedissonTask;
+import com.nice.order.center.service.redis.deplay.queue.redisson.CustomRedissonDelayQueue;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RBlockingQueue;
-import org.redisson.api.RDelayedQueue;
-import org.redisson.api.RedissonClient;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Controller;
@@ -39,11 +35,7 @@ public class RedisController {
 
     private final StringRedisTemplate stringRedisTemplate;
 
-    private final RedissonClient redissonClient;
-
-    private volatile RBlockingQueue<Object> rBlockingQueue;
-
-    private volatile RDelayedQueue<Object> rDelayedQueue;
+    private final CustomRedissonDelayQueue customRedissonDelayQueue;
 
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0000");
 
@@ -85,24 +77,12 @@ public class RedisController {
     @GetMapping("/testRedisKeyExpiration")
     @ResponseBody
     public Boolean testRedisExpiration() {
-        initQueue();
         log.info("Start setting key into Redis");
-        rDelayedQueue.offerAsync("Test Message", 10, TimeUnit.SECONDS);
+        customRedissonDelayQueue.offerAsync("Test Message", 10L, TimeUnit.SECONDS);
         log.info("End setting key into Redis");
 //        stringRedisTemplate.opsForValue().set("testKey", "testValue");
 //        stringRedisTemplate.opsForValue().set("testKey", "testValue", Duration.ofSeconds(3L));
         return true;
-    }
-
-    private void initQueue() {
-        if (rBlockingQueue == null) {
-            synchronized (RedissonTask.class) {
-                if (rBlockingQueue == null) {
-                    this.rBlockingQueue = redissonClient.getBlockingQueue(Constants.QUEUE_NAME);
-                    this.rDelayedQueue = redissonClient.getDelayedQueue(rBlockingQueue);
-                }
-            }
-        }
     }
 
 }
