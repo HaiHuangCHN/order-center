@@ -94,6 +94,7 @@ public class RedisController {
         return true;
     }
 
+    // 第七种（双重校验锁）
     private void initQueue() {
         if (rBlockingQueue == null) {
             synchronized (RedissonTask.class) {

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 /**
+ * Key 过期事件监听
+ *
  * @author haihuang95@zto.com
  * @date 2023/1/9 00:06
  */
@@ -38,6 +40,7 @@ public class RedissonTask {
         }).start();
     }
 
+    // 第七种（双重校验锁）
     private void initQueue() {
         if (rBlockingQueue == null) {
             synchronized (RedissonTask.class) {
