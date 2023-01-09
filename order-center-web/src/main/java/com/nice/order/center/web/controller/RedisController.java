@@ -98,7 +98,7 @@ public class RedisController {
         if (rBlockingQueue == null) {
             synchronized (RedissonTask.class) {
                 if (rBlockingQueue == null) {
-                    this.rBlockingQueue = redissonClient.getBlockingQueue(Constants.QUEUE_NAME);
+                    this.rBlockingQueue = redissonClient.getBlockingQueue(Constants.CUSTOM_QUEUE_NAME);
                     this.rDelayedQueue = redissonClient.getDelayedQueue(rBlockingQueue);
                 }
             }

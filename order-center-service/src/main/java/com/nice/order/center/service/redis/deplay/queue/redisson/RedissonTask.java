@@ -42,7 +42,7 @@ public class RedissonTask {
         if (rBlockingQueue == null) {
             synchronized (RedissonTask.class) {
                 if (rBlockingQueue == null) {
-                    rBlockingQueue = redissonClient.getBlockingQueue(Constants.QUEUE_NAME);
+                    rBlockingQueue = redissonClient.getBlockingQueue(Constants.CUSTOM_QUEUE_NAME);
                 }
             }
         }
