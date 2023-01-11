@@ -4,7 +4,7 @@ import com.nice.order.center.common.enumeration.YesOrNoEnum;
 import com.nice.order.center.common.exception.ErrorCode;
 import com.nice.order.center.common.util.DbEffectUtils;
 import com.nice.order.center.common.util.ModelMapperUtil;
-import com.nice.order.center.common.util.SnowFlakeShortUrlUtil;
+import com.nice.order.center.common.util.SnowFlakeIdGeneratorUtil;
 import com.nice.order.center.dao.entity.OrderDetail;
 import com.nice.order.center.dao.mapper.OrderDetailMapper;
 import com.nice.order.center.dao.util.MapperUtils;
@@ -28,7 +28,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     /**
      * TODO How to make it as global variable?
      */
-    private static final SnowFlakeShortUrlUtil SNOW_FLAKE = new SnowFlakeShortUrlUtil(10, 4);
+    private static final SnowFlakeIdGeneratorUtil SNOW_FLAKE = new SnowFlakeIdGeneratorUtil(10, 4);
 
     private final OrderDetailMapper orderDetailMapper;
 

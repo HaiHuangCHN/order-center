@@ -4,17 +4,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 /**
- * SnowFlakeShortUrlUtil Test
+ * SnowFlakeIdGeneratorUtil Test
  *
  * @author hai.huang.a@outlook.com
  * @date 2022/6/24 00:15
  */
 @Slf4j
-class SnowFlakeShortUrlUtilTest {
+class SnowFlakeIdGeneratorUtilTest {
 
     @Test
     void testNextId() {
-        SnowFlakeShortUrlUtil snowFlake = new SnowFlakeShortUrlUtil(10, 4);
+        SnowFlakeIdGeneratorUtil snowFlake = new SnowFlakeIdGeneratorUtil(10, 4);
         for (int i = 0; i < (1 << 4); i++) {
             // 10进制
             System.out.println(snowFlake.nextId());
