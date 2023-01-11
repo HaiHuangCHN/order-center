@@ -4,11 +4,7 @@ import com.nice.order.center.dao.entity.OrderDetail;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-//import tk.mybatis.mapper.common.Mapper;
 
-/**
- * TODO To learn more
- */
 @Mapper
 // If forget to add @Mapper
 //Description:
