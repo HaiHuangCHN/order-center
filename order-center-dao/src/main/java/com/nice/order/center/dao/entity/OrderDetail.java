@@ -27,7 +27,7 @@ public class OrderDetail extends BaseEntity implements Serializable {
      * Unique ID for each record in the table
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "JDBC")
     private Long id;
 
     /**
