@@ -87,6 +87,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         orderDetail.setUpdatedAt(LocalDateTime.now());
         // orderDetailMapper.insert() 可以返回自增 ID
         int effectedCount = orderDetailMapper.insertSelective(orderDetail);
+        log.info("Do insert and return id={}", orderDetail.getId());
         DbEffectUtils.checkEffect(effectedCount == 1, ErrorCode.GENERAL_BUSINESS_ERROR.GENERAL_BUSINESS_ERROR_CODE);
         return true;
     }
