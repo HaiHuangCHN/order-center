@@ -58,3 +58,8 @@ logging:
           center:
             dao:
               mapper: debug
+
+test:
+  inject:
+    local:
+      time: '16:30:01'
