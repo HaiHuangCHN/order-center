@@ -26,10 +26,17 @@ public class TestController {
     @Value("#{T(java.time.LocalTime).parse('${test.inject.local.time:16:30:00}')}")
     private LocalTime testInjectLocalTime;
 
-    @GetMapping(value = "/test/inject/local/time")
-    public ResponseEntity<LocalTime> getOrder() {
+    @GetMapping(value = "/testInjectLocalTime")
+    public ResponseEntity<LocalTime> testInjectLocalTime() {
         log.info(String.valueOf(testInjectLocalTime));
+        log.error("测试异常打印={}", "参数", new Exception("测试"));
         return ResponseEntity.status(HttpStatus.OK).body(testInjectLocalTime);
+    }
+
+    @GetMapping(value = "/testExceptionPrint")
+    public ResponseEntity<String> testExceptionPrint() {
+        log.error("测试异常打印={}", "参数", new Exception("测试"));
+        return ResponseEntity.status(HttpStatus.OK).body("End");
     }
 
 }
