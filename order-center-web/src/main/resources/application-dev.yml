@@ -63,3 +63,4 @@ test:
   inject:
     local:
       time: '16:30:01'
+    field: testInjectField

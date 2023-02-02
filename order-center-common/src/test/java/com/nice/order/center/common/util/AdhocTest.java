@@ -4,7 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * TODO Fill in desc
@@ -32,6 +35,27 @@ class AdhocTest {
         paramM.put("data_digest", dataDigest);
 
         System.out.println(dataDigest);
+    }
+
+    @Test
+    void testStream() {
+        Map<String, String> mapA = new HashMap<>();
+        mapA.put("orderStatus", "SUBMIT");
+        mapA.put("amount", "1");
+
+        Map<String, String> mapB = new HashMap<>();
+        mapB.put("orderStatus", "DRAFT");
+        mapB.put("amount", "2");
+
+        System.out.println(JacksonUtils.objectToJsonCamel(mapA));
+
+        List<Map<String, String>> a = Stream.of(mapA).collect(Collectors.toList());
+
+        System.out.println(JacksonUtils.objectToJsonCamel(a));
+
+        List<Map<String, String>> b = Stream.of(mapA, mapB).collect(Collectors.toList());
+
+        System.out.println(JacksonUtils.objectToJsonCamel(b));
     }
 
 }
