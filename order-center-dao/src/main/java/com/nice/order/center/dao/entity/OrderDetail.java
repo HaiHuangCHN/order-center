@@ -56,7 +56,9 @@ public class OrderDetail extends BaseEntity implements Serializable {
     private String currency;
 
     /**
-     * Payment status. 0 - NOT_PAID, 1 - PAYING, 2 - PAID, 3 - REFUNDING, 4 - REFUNDED, -1 - PAID_Fail
+     * TODO：补上去 DDL
+
+     * Payment status. 0 - NOT_PAID, 1 - PAYING, 2 - PAID, 3 - REFUNDING, 4 - REFUNDED, -1 - PAID_FAIL, -2 - REFUND_FAIL, -3 - CLOSED
      */
     @Column(name = "payment_status")
     private Integer paymentStatus;
