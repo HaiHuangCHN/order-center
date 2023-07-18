@@ -1,15 +1,14 @@
 server:
   port: 8080
-
 # MyBatis won't check DB connection during start up
 spring:
   application:
     name: order-center
 
   datasource:
-    username: order_center_admin
-    password: jy199510
-    url: jdbc:mysql://localhost:3306/order_center?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&useSSL=false
+    username: ${MYSQL_USERNAME:}
+    password: ${MYSQL_PASSWORD:}
+    url: jdbc:mysql://${MYSQL_HOST:}:3306/order_center?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   cache:
@@ -36,6 +35,21 @@ spring:
         min-idle: 0
         # Connection timeout(millisecond)
         timeout: 5000
+
+  data:
+    mongodb:
+      # 指定 MongoDB 主机地址
+      host: 47.115.219.13
+      # 指定端口，默认就为 27017
+      port: 27017
+      # 指定使用的数据库
+      database: order_center
+      # 登录认证的逻辑库名
+      authentication-database: admin
+      # 用户名
+      username: ${MONGODB_USERNAME:}
+      # 密码
+      password: ${MONGODB_PASSWORD:}
 
 # Cache related config
 cache:

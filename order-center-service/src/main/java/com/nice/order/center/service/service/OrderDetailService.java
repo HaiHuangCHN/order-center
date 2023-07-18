@@ -1,4 +1,4 @@
-package com.nice.order.center.service;
+package com.nice.order.center.service.service;
 
 import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
 import com.nice.order.center.service.dto.res.OrderDetailResDTO;

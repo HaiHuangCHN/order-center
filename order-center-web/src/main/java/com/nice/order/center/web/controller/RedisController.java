@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.DecimalFormat;
@@ -27,6 +28,7 @@ import java.util.concurrent.Executors;
 @RequiredArgsConstructor
 @Controller
 @Deprecated
+@RequestMapping("redis")
 public class RedisController {
 
     private final StringRedisTemplate stringRedisTemplate;
