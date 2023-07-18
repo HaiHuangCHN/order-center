@@ -1,7 +1,7 @@
 package com.nice.order.center.web.controller;
 
 import com.nice.order.center.service.dto.res.OrderDetailResDTO;
-import com.nice.order.center.service.service.OrderDetailMongoService;
+import com.nice.order.center.service.service.order.OrderDetailMongoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

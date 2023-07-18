@@ -1,7 +1,7 @@
 package com.nice.order.center.web.controller;
 
 import com.nice.order.center.common.util.ModelMapperUtil;
-import com.nice.order.center.service.service.OrderDetailService;
+import com.nice.order.center.service.service.order.OrderDetailService;
 import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
 import com.nice.order.center.service.dto.res.OrderDetailResDTO;
 import com.nice.order.center.web.vo.req.OrderDetailReqVO;

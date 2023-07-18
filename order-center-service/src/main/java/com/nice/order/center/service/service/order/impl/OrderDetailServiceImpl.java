@@ -1,4 +1,4 @@
-package com.nice.order.center.service.service.impl;
+package com.nice.order.center.service.service.order.impl;
 
 import com.nice.order.center.common.enumeration.YesOrNoEnum;
 import com.nice.order.center.common.exception.ErrorCode;
@@ -10,7 +10,7 @@ import com.nice.order.center.dao.mapper.OrderDetailMapper;
 import com.nice.order.center.dao.util.MapperUtils;
 import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
 import com.nice.order.center.service.dto.res.OrderDetailResDTO;
-import com.nice.order.center.service.service.OrderDetailService;
+import com.nice.order.center.service.service.order.OrderDetailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

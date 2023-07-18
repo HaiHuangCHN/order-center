@@ -1,4 +1,4 @@
-package com.nice.order.center.service.service;
+package com.nice.order.center.service.service.order;
 
 import com.nice.order.center.service.dto.res.OrderDetailResDTO;
 
