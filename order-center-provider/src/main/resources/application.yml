@@ -1,5 +1,5 @@
 server:
-  port: 9002
+  port: 9001
 spring:
   application:
     name: order-center-provider
@@ -9,7 +9,7 @@ spring:
         serverAddr: ${NACOS_SERVER_ADDR:}
         username: ${NACOS_SERVER_USERNAME:}
         password: ${NACOS_SERVER_PASSWORD:}
-      enabled: true
+        enabled: true
 
 management:
   endpoints:
