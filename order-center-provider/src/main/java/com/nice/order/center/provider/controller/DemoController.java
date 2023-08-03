@@ -12,7 +12,7 @@ public class DemoController {
 
     @GetMapping(value = "/getServerPort")
     public String getServerPort() {
-        return "Hello Nacos Discovery" + serverPort;
+        return "Hello Nacos Discovery " + serverPort;
     }
 
 }
