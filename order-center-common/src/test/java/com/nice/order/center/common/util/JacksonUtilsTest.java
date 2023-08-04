@@ -3,7 +3,7 @@ package com.nice.order.center.common.util;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -49,7 +49,7 @@ class JacksonUtilsTest {
             String semicolonEnd = "', ";
             String comma = ", ";
             ObjectMapper om = new ObjectMapper();
-            om.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+            om.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
             Path path = Paths.get("/Users/haihuang/Desktop/sqlResult.json");
             List<String> allLines = Files.readAllLines(path);
             System.out.println(allLines);
@@ -126,7 +126,7 @@ class JacksonUtilsTest {
         try {
             List<Sites> siteList = new ArrayList<>(1000);
             ObjectMapper om = new ObjectMapper();
-            om.setPropertyNamingStrategy(PropertyNamingStrategies.LOWER_CAMEL_CASE);
+            om.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
             om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             Path path = Paths.get("/Users/haihuang/Desktop/sqlResult2.json");
             List<String> allLines = Files.readAllLines(path);

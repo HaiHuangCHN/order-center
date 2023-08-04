@@ -1,18 +1,2 @@
-server:
-  port: 9001
-spring:
-  application:
-    name: order-center-provider
-  cloud:
-    nacos:
-      discovery:
-        serverAddr: ${NACOS_SERVER_ADDR:}
-        username: ${NACOS_SERVER_USERNAME:}
-        password: ${NACOS_SERVER_PASSWORD:}
-        enabled: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
+default:
+  echoMsg: "Hello World - Local - Default"

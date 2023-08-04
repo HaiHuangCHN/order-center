@@ -1,0 +1,2 @@
+default:
+  echoMsg: "Hello World - Local - Dev"
