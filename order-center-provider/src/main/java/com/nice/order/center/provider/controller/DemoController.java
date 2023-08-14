@@ -15,6 +15,12 @@ public class DemoController {
     @Value("${default.echoMsg}")
     private String defaultEchoMsg;
 
+    @Value("${application.config.inDefaultProfile}")
+    private String applicationConfigInDefaultProfile;
+
+    @Value("${bootstrap.config.inDefaultProfile}")
+    private String bootstrapConfigInDefaultProfile;
+
     @GetMapping(value = "/getServerPort")
     public String getServerPort() {
         return "Hello Nacos Discovery " + serverPort;
@@ -23,6 +29,11 @@ public class DemoController {
     @GetMapping(value = "/getDefaultEchoMsg")
     public String getDefaultEchoMsg() {
         return defaultEchoMsg;
+    }
+
+    @GetMapping(value = "/getConfigInDefaultProfile")
+    public String getConfigInDefaultProfile() {
+        return applicationConfigInDefaultProfile + " | " + bootstrapConfigInDefaultProfile;
     }
 
 }

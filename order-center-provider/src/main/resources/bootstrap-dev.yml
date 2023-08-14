@@ -19,9 +19,14 @@ spring:
         file-extension: yaml # 指定为 yaml 格式的配置
         namespace: 49631895-05c8-4267-a92e-dbce7abe43e5
         group: ORDER_GROUP
+        enabled: true
 
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+
+bootstrap:
+  config:
+    inDefaultProfile: "Bootstrap Config In Dev Profile Local"
