@@ -73,7 +73,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-<!--        https://zhuanlan.zhihu.com/p/305816099?utm_id=0-->
+        <!--        https://zhuanlan.zhihu.com/p/305816099?utm_id=0-->
         <resources>
             <!-- 将 extraConfig 目录下的 extra1.properties 文件打包 -->
             <resource>
@@ -85,7 +85,25 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
+                    <include>application.yml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>bootstrap.yml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
                     <include>application-${current.env}.yml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>bootstrap-${current.env}.yml</include>
                 </includes>
             </resource>
         </resources>

@@ -1,10 +1,4 @@
-server:
-  port: 9001
-
 spring:
-  application:
-    name: order-center-provider
-
   cloud:
     nacos:
       discovery:
@@ -12,6 +6,7 @@ spring:
         username: ${NACOS_SERVER_USERNAME:}
         password: ${NACOS_SERVER_PASSWORD:}
         enabled: true
+
       config:
         serverAddr: ${NACOS_SERVER_ADDR:} # Nacos 作为配置中心地址
         username: ${NACOS_SERVER_USERNAME:}
@@ -19,7 +14,6 @@ spring:
         file-extension: yaml # 指定为 yaml 格式的配置
         namespace: 49631895-05c8-4267-a92e-dbce7abe43e5
         group: ORDER_GROUP
-        enabled: true
 
 management:
   endpoints:
