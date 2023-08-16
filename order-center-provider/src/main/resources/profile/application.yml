@@ -3,4 +3,4 @@ default:
 
 application:
   config:
-    inDefaultProfile: "Application Config In Default Profile Local - New"
+    inDefaultProfile: "Application Config In Default Profile Local"

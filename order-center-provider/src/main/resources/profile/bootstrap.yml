@@ -1,0 +1,10 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: order-center-provider
+
+bootstrap:
+  config:
+    inDefaultProfile: "Bootstrap Config In Default Profile Local"

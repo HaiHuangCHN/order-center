@@ -48,9 +48,9 @@
             <properties>
                 <current.env>dev</current.env>
             </properties>
-            <!--            <activation>-->
-<!--                <activeByDefault>true</activeByDefault>-->
-<!--            </activation>-->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
         <profile>
             <id>test</id>
@@ -83,25 +83,25 @@
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/resources/profile</directory>
                 <includes>
                     <include>application.yml</include>
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/resources/profile</directory>
                 <includes>
                     <include>bootstrap.yml</include>
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/resources/profile</directory>
                 <includes>
                     <include>application-${current.env}.yml</include>
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/resources/profile</directory>
                 <includes>
                     <include>bootstrap-${current.env}.yml</include>
                 </includes>
