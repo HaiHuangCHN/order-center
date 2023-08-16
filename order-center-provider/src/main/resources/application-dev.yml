@@ -1,2 +1,2 @@
 default:
-  echoMsg: "Hello World - Local - Dev - New"
+  echoMsg: "Hello World - Local - Dev - Out"
