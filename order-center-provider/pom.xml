@@ -86,12 +86,8 @@
                 <directory>src/main/resources/profile</directory>
                 <includes>
                     <include>application.yml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources/profile</directory>
-                <includes>
                     <include>bootstrap.yml</include>
+                    <include>*.properties</include>
                 </includes>
             </resource>
             <resource>
