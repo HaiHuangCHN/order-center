@@ -5,7 +5,8 @@ spring:
         serverAddr: ${NACOS_SERVER_ADDR:} # Nacos服务注册中心地址
         username: ${NACOS_SERVER_USERNAME:}
         password: ${NACOS_SERVER_PASSWORD:}
-        enabled: true
+        namespace: eedc3b64-6639-4490-b9fe-b732af43a3c1
+        group: ORDER_GROUP
 
       config:
         serverAddr: ${NACOS_SERVER_ADDR:} # Nacos 作为配置中心地址
