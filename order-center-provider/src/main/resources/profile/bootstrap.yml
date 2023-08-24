@@ -4,6 +4,20 @@ server:
 spring:
   application:
     name: order-center-provider
+  cloud:
+    nacos:
+      discovery:
+        serverAddr: ${spring.cloud.nacos.server-addr}
+        username: nacos
+        password: JY@199510@nacos
+        enabled: true
+      config:
+        serverAddr: ${spring.cloud.nacos.server-addr}
+        namespace: eedc3b64-6639-4490-b9fe-b732af43a3c1
+        username: nacos
+        password: JY@199510@nacos
+        file-extension: yaml
+        group: ORDER_GROUP
 
 bootstrap:
   config:
