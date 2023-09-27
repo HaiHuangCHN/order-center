@@ -11,6 +11,7 @@ spring:
         username: nacos
         password: JY@199510@nacos
         enabled: true
+
       config:
         serverAddr: ${spring.cloud.nacos.server-addr-custom}
         namespace: eedc3b64-6639-4490-b9fe-b732af43a3c1
