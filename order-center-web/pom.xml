@@ -56,6 +56,10 @@
         </dependency>
         <!-- https://blog.csdn.net/zxf1242652895/article/details/106365308 -->
         <!-- Redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
