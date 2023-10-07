@@ -21,3 +21,7 @@ management:
     web:
       exposure:
         include: '*'
+
+bootstrap:
+  config:
+    inDefaultProfile: "Bootstrap Config In Test Profile Local"
