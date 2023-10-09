@@ -37,6 +37,15 @@ spring:
         # Connection timeout(millisecond)
         timeout: 5000
 
+  thymeleaf:
+    mode: HTML
+    cache: true
+    prefix: classpath:/templates/
+    encoding: UTF-8
+    suffix: .html
+    check-template-location: true
+    template-resolver-order: 1
+
 # Cache related config
 cache:
   default:
