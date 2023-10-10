@@ -48,9 +48,8 @@ public class OrderDetailController {
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 
-    @GetMapping(value = "/queryByOrderNo/{orderNo}")
-    public ResponseEntity<OrderDetailQueryResVO> getOrderByOrderNo(HttpServletRequest request,
-                                                                   @PathVariable("orderNo") String orderNo) {
+    @GetMapping(value = "/queryByOrderNo")
+    public ResponseEntity<OrderDetailQueryResVO> getOrderByOrderNo(@RequestParam("orderNo") String orderNo, ) {
         OrderDetailQueryResDTO resDto = orderDetailService.findOrderDetailByOrderNo(orderNo);
         OrderDetailQueryResVO resVo = ModelMapperUtil.getModelMapperWithFieldMatching().map(resDto,
                 OrderDetailQueryResVO.class);
