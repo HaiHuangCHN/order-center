@@ -86,7 +86,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
-    public boolean addNewOrder(OrderDetailReqDTO orderDetailReqDto) {
+    public String createOrder(OrderDetailReqDTO orderDetailReqDto) {
         OrderDetail orderDetail = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqDto, OrderDetail.class);
         // If pass an id that is existed in DB, will get java.sql.SQLIntegrityConstraintViolationException: Duplicate
         // entry 'id' for key 'order_detail.PRIMARY'
@@ -103,7 +103,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         int effectedCount = orderDetailMapper.insertSelective(orderDetail);
         log.info("Do insert and return id={}", orderDetail.getId());
         DbEffectUtils.checkEffect(effectedCount == 1, ErrorCode.GENERAL_BUSINESS_ERROR.GENERAL_BUSINESS_ERROR_CODE);
-        return true;
+        return orderDetail.getOrderNo();
     }
 
 }

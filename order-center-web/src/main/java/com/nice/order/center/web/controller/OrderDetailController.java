@@ -47,11 +47,11 @@ public class OrderDetailController {
 
     // TODO Get the user from session instead of parameter
     @PostMapping(value = "order/create")
-    public ResponseEntity<Boolean> createOrder(@RequestBody OrderDetailReqVO orderDetailReqVO) {
+    public ResponseEntity<String> createOrder(@RequestBody OrderDetailReqVO orderDetailReqVO) {
         OrderDetailReqDTO orderDetailReqDto = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqVO,
                 OrderDetailReqDTO.class);
-        boolean result = orderDetailService.addNewOrder(orderDetailReqDto);
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+        String orderNo = orderDetailService.createOrder(orderDetailReqDto);
+        return ResponseEntity.status(HttpStatus.OK).body(orderNo);
     }
 
 }
