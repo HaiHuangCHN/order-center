@@ -1,10 +1,10 @@
 package com.nice.order.center.web.controller;
 
 import com.nice.order.center.common.util.ModelMapperUtil;
+import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
 import com.nice.order.center.service.dto.res.OrderDetailCreateResDTO;
 import com.nice.order.center.service.dto.res.OrderDetailQueryResDTO;
 import com.nice.order.center.service.service.order.OrderDetailService;
-import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
 import com.nice.order.center.web.vo.req.OrderDetailReqVO;
 import com.nice.order.center.web.vo.res.OrderDetailCreateResVO;
 import com.nice.order.center.web.vo.res.OrderDetailQueryResVO;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Type;
@@ -42,7 +43,7 @@ public class OrderDetailController {
         log.info("userId：{}", request.getParameter("userNo"));
         log.info("arbitrary：{}", request.getParameter("arbitrary"));
         List<OrderDetailQueryResDTO> resDto = orderDetailService.findOrderDetailByUserNo(userNo);
-        Type type = new TypeToken<List<OrderDetailQueryResVO>>(){}.getType();
+        Type type = new TypeToken<List<OrderDetailQueryResVO>>() {}.getType();
         List<OrderDetailQueryResVO> resVo = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(resDto, type);
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
@@ -51,7 +52,16 @@ public class OrderDetailController {
     public ResponseEntity<OrderDetailQueryResVO> getOrderByOrderNo(HttpServletRequest request,
                                                                    @PathVariable("orderNo") String orderNo) {
         OrderDetailQueryResDTO resDto = orderDetailService.findOrderDetailByOrderNo(orderNo);
-        OrderDetailQueryResVO resVo = ModelMapperUtil.getModelMapperWithFieldMatching().map(resDto, OrderDetailQueryResVO.class);
+        OrderDetailQueryResVO resVo = ModelMapperUtil.getModelMapperWithFieldMatching().map(resDto,
+                OrderDetailQueryResVO.class);
+        return ResponseEntity.status(HttpStatus.OK).body(resVo);
+    }
+
+    @GetMapping(value = "/queryByOrderNo")
+    public ResponseEntity<OrderDetailQueryResVO> getOrderByOrderNo2(@RequestParam("orderNo") String orderNo) {
+        OrderDetailQueryResDTO resDto = orderDetailService.findOrderDetailByOrderNo(orderNo);
+        OrderDetailQueryResVO resVo = ModelMapperUtil.getModelMapperWithFieldMatching().map(resDto,
+                OrderDetailQueryResVO.class);
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 
@@ -61,7 +71,8 @@ public class OrderDetailController {
         OrderDetailReqDTO orderDetailReqDto = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqVO,
                 OrderDetailReqDTO.class);
         OrderDetailCreateResDTO orderDetailCreateResDto = orderDetailService.createOrder(orderDetailReqDto);
-        OrderDetailCreateResVO resVo = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailCreateResDto, OrderDetailCreateResVO.class);
+        OrderDetailCreateResVO resVo = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailCreateResDto,
+                OrderDetailCreateResVO.class);
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 
