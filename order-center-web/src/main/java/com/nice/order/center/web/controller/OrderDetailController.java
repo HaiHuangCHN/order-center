@@ -1,10 +1,12 @@
 package com.nice.order.center.web.controller;
 
 import com.nice.order.center.common.util.ModelMapperUtil;
+import com.nice.order.center.service.dto.res.OrderDetailCreateResDTO;
 import com.nice.order.center.service.dto.res.OrderDetailQueryResDTO;
 import com.nice.order.center.service.service.order.OrderDetailService;
 import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
 import com.nice.order.center.web.vo.req.OrderDetailReqVO;
+import com.nice.order.center.web.vo.res.OrderDetailCreateResVO;
 import com.nice.order.center.web.vo.res.OrderDetailQueryResVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,11 +49,12 @@ public class OrderDetailController {
 
     // TODO Get the user from session instead of parameter
     @PostMapping(value = "order/create")
-    public ResponseEntity<String> createOrder(@RequestBody OrderDetailReqVO orderDetailReqVO) {
+    public ResponseEntity<OrderDetailCreateResVO> createOrder(@RequestBody OrderDetailReqVO orderDetailReqVO) {
         OrderDetailReqDTO orderDetailReqDto = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqVO,
                 OrderDetailReqDTO.class);
-        String orderNo = orderDetailService.createOrder(orderDetailReqDto);
-        return ResponseEntity.status(HttpStatus.OK).body(orderNo);
+        OrderDetailCreateResDTO orderDetailCreateResDto = orderDetailService.createOrder(orderDetailReqDto);
+        OrderDetailCreateResVO resVo = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailCreateResDto, OrderDetailCreateResVO.class);
+        return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 
 }
