@@ -47,6 +47,14 @@ public class OrderDetailController {
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 
+    @GetMapping(value = "/queryByOrderNo/{orderNo}")
+    public ResponseEntity<OrderDetailQueryResVO> getOrderByOrderNo(HttpServletRequest request,
+                                                                   @PathVariable("orderNo") String orderNo) {
+        OrderDetailQueryResDTO resDto = orderDetailService.findOrderDetailByOrderNo(orderNo);
+        OrderDetailQueryResVO resVo = ModelMapperUtil.getModelMapperWithFieldMatching().map(resDto, OrderDetailQueryResVO.class);
+        return ResponseEntity.status(HttpStatus.OK).body(resVo);
+    }
+
     // TODO Get the user from session instead of parameter
     @PostMapping(value = "order/create")
     public ResponseEntity<OrderDetailCreateResVO> createOrder(@RequestBody OrderDetailReqVO orderDetailReqVO) {
