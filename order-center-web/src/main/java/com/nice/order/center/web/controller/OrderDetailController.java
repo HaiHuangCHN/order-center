@@ -1,10 +1,12 @@
 package com.nice.order.center.web.controller;
 
+import com.nice.order.center.common.util.JacksonUtils;
 import com.nice.order.center.common.util.ModelMapperUtil;
 import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
 import com.nice.order.center.service.dto.res.OrderDetailCreateResDTO;
 import com.nice.order.center.service.dto.res.OrderDetailQueryResDTO;
 import com.nice.order.center.service.service.order.OrderDetailService;
+import com.nice.order.center.web.vo.req.OrderDetailQueryReqVO;
 import com.nice.order.center.web.vo.req.OrderDetailReqVO;
 import com.nice.order.center.web.vo.res.OrderDetailCreateResVO;
 import com.nice.order.center.web.vo.res.OrderDetailQueryResVO;
@@ -56,8 +58,10 @@ public class OrderDetailController {
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 
-    @GetMapping(value = "/queryByOrderNo")
-    public ResponseEntity<OrderDetailQueryResVO> getOrderByOrderNo2(@RequestParam("orderNo") String orderNo) {
+    @GetMapping(value = "/queryByOrderNo2")
+    public ResponseEntity<OrderDetailQueryResVO> getOrderByOrderNo2(@RequestParam("orderNo") String orderNo,
+                                                                    @RequestBody OrderDetailQueryReqVO orderDetailQueryReqVo) {
+        log.info(JacksonUtils.objectToJsonCamel(orderDetailQueryReqVo));
         OrderDetailQueryResDTO resDto = orderDetailService.findOrderDetailByOrderNo(orderNo);
         OrderDetailQueryResVO resVo = ModelMapperUtil.getModelMapperWithFieldMatching().map(resDto,
                 OrderDetailQueryResVO.class);
