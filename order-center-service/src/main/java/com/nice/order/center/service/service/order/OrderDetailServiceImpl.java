@@ -9,13 +9,16 @@ import com.nice.order.center.dao.entity.OrderDetail;
 import com.nice.order.center.dao.mapper.OrderDetailMapper;
 import com.nice.order.center.dao.util.MapperUtils;
 import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
-import com.nice.order.center.service.dto.res.OrderDetailResDTO;
+import com.nice.order.center.service.dto.res.OrderDetailQueryResDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Try no @Autowired
@@ -33,15 +36,26 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     private final OrderDetailMapper orderDetailMapper;
 
     /**
+     *
+     * @param userNo
+     * @return
+     */
+    @Override
+    public List<OrderDetailQueryResDTO> findOrderDetailByUserNo(String userNo) {
+        Example example = MapperUtils.buildExample(OrderDetail.class, o -> o
+                .andEqualTo(OrderDetail::getUserNo, userNo)
+                .andEqualTo(OrderDetail::getYn, YesOrNoEnum.YES.getCode()));
+        List<OrderDetail> existingRecordList = orderDetailMapper.selectByExample(example);
+        Type type = new TypeToken<List<OrderDetailQueryResDTO>>(){}.getType();
+        return ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(existingRecordList, type);
+    }
+
+    /**
      * selectByPrimaryKey, if not pass primary key, will be something like this:
      * ==>  Preparing: SELECT created_by,created_at,updated_by,updated_at,id,order_no,order_status,total_amount,
      * currency,payment_status,user_no,yn FROM order_detail WHERE id = ?
      * ==> Parameters: null
      * <==      Total: 0
-     * <p>
-     * existsWithPrimaryKey
-     * ==> Parameters: null
-     * <==      Total: 1
      * <p>
      * andAllEqualTo(Object param), fields with null considered as condition? Yes!
      * Example example = new Example(OrderDetail.class);
@@ -50,7 +64,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      * condition.setId(1L);
      * criteria.andAllEqualTo(condition);
      * log.info(JacksonUtils.objectToJsonCamel(orderDetailMapper.selectByExample(example)));
-     * return ModelMapperUtil.getModelMapperWithFieldMatching().map(null, OrderDetailResDTO.class);
+     * return ModelMapperUtil.getModelMapperWithFieldMatching().map(null, OrderDetailQueryResDTO.class);
      * <p>
      * ==>  Preparing: SELECT created_by,created_at,updated_by,updated_at,id,order_no,order_status,total_amount,
      * currency,payment_status,user_no,yn FROM order_detail WHERE ( ( total_amount is null and created_at is null and
@@ -59,16 +73,16 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      * ==> Parameters: 1(Long)
      * <==      Total: 0
      *
-     * @param userNo
+     * @param orderNo
      * @return
      */
     @Override
-    public OrderDetailResDTO findOrderDetailByUserNo(String userNo) {
+    public OrderDetailQueryResDTO findOrderDetailByOrderNo(String orderNo) {
         Example example = MapperUtils.buildExample(OrderDetail.class, o -> o
-                .andEqualTo(OrderDetail::getUserNo, userNo)
+                .andEqualTo(OrderDetail::getOrderNo, orderNo)
                 .andEqualTo(OrderDetail::getYn, YesOrNoEnum.YES.getCode()));
         OrderDetail existingRecord = orderDetailMapper.selectOneByExample(example);
-        return ModelMapperUtil.getModelMapperWithFieldMatching().map(existingRecord, OrderDetailResDTO.class);
+        return ModelMapperUtil.getModelMapperWithFieldMatching().map(existingRecord, OrderDetailQueryResDTO.class);
     }
 
     @Override

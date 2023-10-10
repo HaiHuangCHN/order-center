@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-public class OrderDetailResVO implements Serializable {
+public class OrderDetailQueryResVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

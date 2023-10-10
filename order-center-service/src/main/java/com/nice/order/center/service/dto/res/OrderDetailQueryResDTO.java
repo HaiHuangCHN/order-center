@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class OrderDetailResDTO implements Serializable {
+public class OrderDetailQueryResDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

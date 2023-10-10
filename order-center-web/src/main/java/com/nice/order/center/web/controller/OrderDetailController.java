@@ -1,13 +1,14 @@
 package com.nice.order.center.web.controller;
 
 import com.nice.order.center.common.util.ModelMapperUtil;
+import com.nice.order.center.service.dto.res.OrderDetailQueryResDTO;
 import com.nice.order.center.service.service.order.OrderDetailService;
 import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
-import com.nice.order.center.service.dto.res.OrderDetailResDTO;
 import com.nice.order.center.web.vo.req.OrderDetailReqVO;
-import com.nice.order.center.web.vo.res.OrderDetailResVO;
+import com.nice.order.center.web.vo.res.OrderDetailQueryResVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -29,15 +32,16 @@ public class OrderDetailController {
     private final OrderDetailService orderDetailService;
 
     @GetMapping(value = "/queryByUserNo/{userNo}")
-    public ResponseEntity<OrderDetailResVO> getOrder(HttpServletRequest request,
-                                                     @PathVariable("userNo") String userNo) {
+    public ResponseEntity<List<OrderDetailQueryResVO>> getOrder(HttpServletRequest request,
+                                                                @PathVariable("userNo") String userNo) {
         log.info("请求时间[{}]，接口URL[{}]，接口方法[{}]，调用结果[{}]，执行时间[{}]", LocalDateTime.now(), "", "", "", "");
         log.info("请求时间[{}]，接口URL[{}]，接口方法[{}]，调用结果[{}]，执行时间[{}]", LocalDateTime.now(), "", "", "", "");
         log.info("servletPath：{}", request.getServletPath());
         log.info("userId：{}", request.getParameter("userNo"));
         log.info("arbitrary：{}", request.getParameter("arbitrary"));
-        OrderDetailResDTO resDto = orderDetailService.findOrderDetailByUserNo(userNo);
-        OrderDetailResVO resVo = ModelMapperUtil.getModelMapperWithFieldMatching().map(resDto, OrderDetailResVO.class);
+        List<OrderDetailQueryResDTO> resDto = orderDetailService.findOrderDetailByUserNo(userNo);
+        Type type = new TypeToken<List<OrderDetailQueryResVO>>(){}.getType();
+        List<OrderDetailQueryResVO> resVo = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(resDto, type);
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 
