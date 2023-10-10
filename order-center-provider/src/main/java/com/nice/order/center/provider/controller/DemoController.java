@@ -13,6 +13,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,8 +53,8 @@ public class DemoController {
         return applicationConfigInDefaultProfile + " | " + bootstrapConfigInDefaultProfile;
     }
 
-    @GetMapping(value = "/queryByOrderNo2")
-    public ResponseEntity<OrderDetailQueryRemoteResDTO> getOrderByOrderNo2(@RequestParam("orderNo") String orderNo,
+    @PostMapping(value = "/queryByOrderNo2")
+    public ResponseEntity<OrderDetailQueryRemoteResDTO> getOrderByOrderNo2(@RequestParam(value = "orderNo", required = false) String orderNo,
                                                                            @RequestBody OrderDetailQueryRemoteReqDTO orderDetailQueryReqVo) {
         log.info(JacksonUtils.objectToJsonCamel(orderDetailQueryReqVo));
         OrderDetailQueryResDTO resDto = orderDetailService.findOrderDetailByOrderNo(orderNo);
