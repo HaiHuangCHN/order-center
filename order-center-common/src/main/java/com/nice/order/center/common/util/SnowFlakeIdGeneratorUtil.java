@@ -60,7 +60,7 @@ public final class SnowFlakeIdGeneratorUtil {
     // 毫秒内序列号
     private volatile long sequence = 0L;
     // 上一次生成ID的时间戳
-    private volatile long lastTimetamsp = -1L;
+    private volatile long lastTimestamp = -1L;
 
     /**
      * 根据指定的数据中心ID和机器标志ID生成指定的序列号
@@ -96,13 +96,13 @@ public final class SnowFlakeIdGeneratorUtil {
         long currentTimestamp = currentMillis();
 
         // 如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过，这个时候应当抛出异常
-        if (currentTimestamp < lastTimetamsp) {
+        if (currentTimestamp < lastTimestamp) {
             throw new RuntimeException(
                     String.format("Clock moved backwards. Refusing to generate id for %d milliseconds",
-                            lastTimetamsp - currentTimestamp));
+                            lastTimestamp - currentTimestamp));
         }
 
-        if (currentTimestamp == lastTimetamsp) {
+        if (currentTimestamp == lastTimestamp) {
             // 相同毫秒内，则进行毫秒内序列递增
             sequence = (sequence + 1) & MAX_SEQUENCE;
             // 同一毫秒的序列数已经达到最大（毫秒内序列溢出），阻塞到下一个毫秒，获取下一个毫秒
@@ -115,18 +115,18 @@ public final class SnowFlakeIdGeneratorUtil {
         }
 
         // 上次生成ID的时间截
-        lastTimetamsp = currentTimestamp;
+        lastTimestamp = currentTimestamp;
 
         // 移位并通过或运算拼到一起组成64位的ID
-        return (currentTimestamp - START_TIMESTAMP) << TIMESTAMP_LEFT //时间戳部分
-                | dataCenterId << DATA_CENTER_LEFT                    //数据中心部分
-                | machineId << MACHINE_LEFT                           //机器标识部分
-                | sequence;                                           //序列号部分
+        return (currentTimestamp - START_TIMESTAMP) << TIMESTAMP_LEFT // 时间戳部分
+                | dataCenterId << DATA_CENTER_LEFT                    // 数据中心部分
+                | machineId << MACHINE_LEFT                           // 机器标识部分
+                | sequence;                                           // 序列号部分
     }
 
     private long tillNextMill() {
         long currentMillis = currentMillis();
-        while (currentMillis <= lastTimetamsp) {
+        while (currentMillis <= lastTimestamp) {
             currentMillis = currentMillis();
         }
         return currentMillis;
