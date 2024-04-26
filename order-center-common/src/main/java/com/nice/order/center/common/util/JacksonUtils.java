@@ -25,7 +25,7 @@ public class JacksonUtils {
 
     private static void initObjectMapperCamel() {
         objectMapperCamel = new ObjectMapper();
-        objectMapperCamel.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        objectMapperCamel.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
         objectMapperCamel.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 

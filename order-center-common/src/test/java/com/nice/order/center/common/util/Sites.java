@@ -17,6 +17,8 @@ public class Sites implements Comparable<Sites> {
 
     private Date date;
 
+    private InconsistentInstance inconsistentInstance;
+
     @Override
     public String toString() {
         return "Sites{" +

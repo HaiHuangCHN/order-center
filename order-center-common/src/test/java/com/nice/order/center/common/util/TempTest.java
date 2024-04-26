@@ -41,5 +41,20 @@ public class TempTest {
         System.out.println(sitesList);
     }
 
+    @Test
+    public void testInconsistentInstance() {
+        Sites site1 = new Sites();
+        site1.setSiteCode("1");
+        site1.setSiteName("TestA");
+        site1.setDate(new Date());
+        InconsistentInstance inconsistentInstance = new InconsistentInstance();
+        inconsistentInstance.setFieldOne("I am A");
+        site1.setInconsistentInstance(inconsistentInstance);
+
+        inconsistentInstance.setFieldOne("A becomes B");
+
+        System.out.println(JacksonUtils.objectToJsonCamel(site1));
+    }
+
 
 }
