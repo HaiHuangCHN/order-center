@@ -1,4 +1,4 @@
-package com.nice.order.center.common.util;
+package com.nice.order.center.common.util.bean.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

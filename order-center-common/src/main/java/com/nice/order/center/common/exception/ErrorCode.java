@@ -12,8 +12,11 @@ import java.util.Map;
 /**
  * 错误码
  *
+ * 用户登陆及权限相关：1000 - 1999
+ * 非业务类的系统错误：2000 - 2999
+ *
  * @author hai.huang.a@outlook.com
- * @date 2023/1/6 13:17
+ * @date 2024/7/10 13:17
  */
 @Slf4j
 public class ErrorCode {
@@ -64,24 +67,25 @@ public class ErrorCode {
     public enum SYSTEM_ERROR_CODE implements IErrorCode {
 
         /**
-         * 未经过注册的错误码
+         * 未经注册的错误码
          */
-        NOT_REGISTERED_ERROR_CODE("-90", "not.registered.error.code"),
+        NOT_REGISTERED_ERROR_CODE("2000", "not.registered.error.code"),
 
         /**
          * 内部中断
          */
-        INTERNAL_INTERRUPTED("-51", "internal.interrupted"),
+        INTERNAL_INTERRUPTED("2001", "internal.interrupted"),
 
         /**
-         * 并发锁异常
+         * 内部错误
          */
-        CONCURRENT_ERROR("-50", "concurrent.error"),
+        INTERNAL_ERROR("2002", "internal.error"),
 
         /**
-         * 系统内部错误
+         * 并发异常
          */
-        INTERNAL_ERROR("-10", "internal.error");
+        CONCURRENT_ERROR("2003", "concurrent.error"),
+        ;
 
         private final String errorCode;
 
@@ -99,17 +103,17 @@ public class ErrorCode {
         /**
          * 插入错误
          */
-        INSERT_ERROR("db_001", "db.insert.error"),
+        INSERT_ERROR("3000", "insert.error"),
 
         /**
          * 更新错误
          */
-        UPDATE_ERROR("db_002", "db.update.error"),
+        UPDATE_ERROR("3001", "update.error"),
 
         /**
          * 删除错误
          */
-        DELETE_ERROR("db_003", "db.delete.error"),
+        DELETE_ERROR("3002", "delete.error"),
         ;
 
         private final String errorCode;
@@ -128,14 +132,14 @@ public class ErrorCode {
         /**
          * 处理出错，请联系客服
          */
-        CONTACT_SERVICE_DESK("biz_001", "处理出错，请联系客服"),
+        CONTACT_SERVICE_DESK("4000", "contact.service.desk"),
 
         /**
          * 未定义具体的错误码时，可临时用这个通用的业务错误码代替
          * <p>
          * 注：仅供临时使用，建议将业务错误具体化
          */
-        GENERAL_BUSINESS_ERROR_CODE("biz_999", "业务错误"),
+        GENERAL_BUSINESS_ERROR_CODE("4001", "general.business.error.code"),
         ;
 
         private final String errorCode;

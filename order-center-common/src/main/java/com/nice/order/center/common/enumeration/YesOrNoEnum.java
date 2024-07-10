@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum YesOrNoEnum {
 
+
     YES((byte)1, "是"),
 
     NO((byte)0, "否");
@@ -15,5 +16,6 @@ public enum YesOrNoEnum {
     private final Byte code;
 
     private final String remark;
+
 
 }

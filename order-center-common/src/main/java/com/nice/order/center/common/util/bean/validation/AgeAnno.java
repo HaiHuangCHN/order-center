@@ -1,4 +1,4 @@
-package com.nice.order.center.common.util;
+package com.nice.order.center.common.util.bean.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -7,18 +7,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * Bean Validation: valid when "given day > current day + given day interval"
- */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {DayAfterValidator.class})
-public @interface DayAfter {
+@Constraint(validatedBy = { AgeAnnoValidator.class })
+public @interface AgeAnno {
 
 
-    String message() default "Field not valid";
-
-    int dayAfter() default 2;
+    String message() default "error";
 
     Class<?>[] groups() default {};
 
