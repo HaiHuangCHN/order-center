@@ -19,6 +19,7 @@ import java.util.Optional;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class IpUtil {
 
+
     /**
      * 获取本机所有网卡信息
      *
@@ -108,6 +109,7 @@ public final class IpUtil {
         }
         return Optional.of(inet4Addresses.get(0));
     }
+
 
 }
 

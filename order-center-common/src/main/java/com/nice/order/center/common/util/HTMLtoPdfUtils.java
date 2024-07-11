@@ -13,7 +13,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @Slf4j
-public class HTMLtoPdfUtils {
+public final class HTMLtoPdfUtils {
+
 
     public static void convert10Mul15(String wkhtmltopdfPath, String srcPath, String destPath, String height,
                                       String width) {
@@ -63,4 +64,6 @@ public class HTMLtoPdfUtils {
     public static void convert10Mul15(String srcPath, String destPath, String height, String width) {
         convert10Mul15("", srcPath, destPath, height, width);
     }
+
+
 }

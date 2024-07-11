@@ -12,19 +12,19 @@ public class OtherUtils {
 
 
     public static Map<String, Object> convertObjToMap(Object obj) {
-        Map<String, Object> reMap = new HashMap<String, Object>();
+        Map<String, Object> objKeyValueMap = new HashMap<>();
         if (obj == null) {
-            return null;
+            return Collections.emptyMap();
         }
-        String[] fieldNames = getFiledName(obj);
+        String[] fieldNames = OtherUtils.getFiledName(obj);
         for (int j = 0; j < fieldNames.length; j++) {
-            Object value = getFieldValueByName(fieldNames[j], obj);
+            Object value = OtherUtils.getFieldValueByName(fieldNames[j], obj);
             if (null != value) {
-                reMap.put(fieldNames[j], value);
+                objKeyValueMap.put(fieldNames[j], value);
             }
 
         }
-        return reMap;
+        return objKeyValueMap;
     }
 
     private static String[] getFiledName(Object obj) {
@@ -45,9 +45,8 @@ public class OtherUtils {
         try {
             String firstLetter = fieldName.substring(0, 1).toUpperCase();
             String getter = "get" + firstLetter + fieldName.substring(1);
-            Method method = o.getClass().getMethod(getter, new Class[]{});
-            Object value = method.invoke(o, new Object[]{});
-            return value;
+            Method method = o.getClass().getMethod(getter);
+            return method.invoke(o);
         } catch (Exception e) {
             return null;
         }

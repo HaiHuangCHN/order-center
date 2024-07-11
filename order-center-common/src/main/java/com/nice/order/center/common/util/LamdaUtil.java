@@ -9,6 +9,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+/**
+ * TODO hai learn
+ */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class LamdaUtil {

@@ -6,6 +6,8 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
 
@@ -16,7 +18,8 @@ import java.util.Map;
  * Token's encode and decode
  */
 @Slf4j
-public class JwtUtils {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class JwtUtils {
 
     /**
      * @deprecated 测试用
@@ -27,13 +30,13 @@ public class JwtUtils {
     /**
      * Generate token
      *
-     * @param profileInfo
+     * @param obj
      * @return
      */
-    public static String generateToken(Object profileInfo, String secret) {
-        Assert.notNull(profileInfo, "The object must be not null");
-        Map<String, Object> convertedMap = OtherUtils.convertObjToMap(profileInfo);
-//        log.debug(convertedMap.toString());
+    public static String generateJwtToken(Object obj, String secret) {
+        Assert.notNull(obj, "The object must be not null");
+        Map<String, Object> objKeyValueMap = OtherUtils.convertObjToMap(obj);
+//        log.debug(objKeyValueMap.toString());
 
         // header map
         Map<String, Object> headerMap = new HashMap<>();
@@ -43,7 +46,7 @@ public class JwtUtils {
 
         // payload map
         Map<String, Object> payloadMap = new HashMap<>();
-        for (Map.Entry<String, Object> entrySet : convertedMap.entrySet()) {
+        for (Map.Entry<String, Object> entrySet : objKeyValueMap.entrySet()) {
             if (entrySet.getValue() != null) {
                 payloadMap.put(entrySet.getKey(), entrySet.getValue());
             }
@@ -53,8 +56,10 @@ public class JwtUtils {
         // build token
         Builder builder = JWT.create().withHeader(headerMap);
         for (Map.Entry<String, Object> entrySet : payloadMap.entrySet()) {
-            builder = builder.withClaim(entrySet.getKey().toString(), entrySet.getValue().toString()); // signature
+            // signature
+            builder = builder.withClaim(entrySet.getKey(), entrySet.getValue().toString());
         }
+
         return builder.sign(Algorithm.HMAC256(secret));
     }
 
@@ -63,10 +68,11 @@ public class JwtUtils {
      *
      * @param token
      * @param obj
+     * @param secret
      * @return
      */
     public static boolean verifyToken(String token, Object obj, String secret) {
-        DecodedJWT decodedJwt = null;
+        DecodedJWT decodedJwt;
         try {
             JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret)).build();
             decodedJwt = verifier.verify(token);
@@ -74,40 +80,33 @@ public class JwtUtils {
             // Fail to verify token, throw exception
             throw new RuntimeException("fail verify token");
         }
-        return checkFields(decodedJwt.getClaims(), obj);
+        return JwtUtils.checkFields(decodedJwt.getClaims(), obj);
     }
 
     private static boolean checkFields(Map<String, Claim> claims, Object obj) {
-        boolean isMatch = true;
-        // TODO Map<String, Object> why object? Would that effect the logic?
-        Map<String, Object> objMap = OtherUtils.convertObjToMap(obj);
-        removeElement(objMap);
-        if (claims.size() != objMap.size()) {
-            isMatch = false;
-            return isMatch;
+        Map<String, Object> objKeyValueMap = OtherUtils.convertObjToMap(obj);
+        JwtUtils.removeSignField(objKeyValueMap);
+        if (claims.size() != objKeyValueMap.size()) {
+            return false;
         }
         for (Map.Entry<String, Claim> claimEntry : claims.entrySet()) {
             boolean fieldMatch = false;
-            for (Map.Entry<String, Object> objEntry : objMap.entrySet()) {
-                String a = claimEntry.getKey();
-                String b = objEntry.getKey();
+            for (Map.Entry<String, Object> objEntry : objKeyValueMap.entrySet()) {
                 if (claimEntry.getKey().equals(objEntry.getKey())
-                        && claimEntry.getValue().asString().equals(objEntry.getValue())) {
+                        && claimEntry.getValue().equals(objEntry.getValue())) {
                     fieldMatch = true;
                     break;
                 }
             }
             if (!fieldMatch) {
-                isMatch = false;
-                return isMatch;
-            } else {
-                // TODO So? Just empty?
+                return false;
             }
         }
-        return isMatch;
+
+        return true;
     }
 
-    private static void removeElement(Map<String, Object> objMap) {
+    private static void removeSignField(Map<String, Object> objMap) {
         for (Map.Entry<String, Object> objEntry : objMap.entrySet()) {
             if (objEntry.getKey().equals("sign")) {
                 objMap.remove("sign");
