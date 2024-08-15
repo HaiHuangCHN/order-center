@@ -82,7 +82,7 @@ public class OtherUtils {
      * @param key key, str message
      * @return str encode
      */
-    public String encodeBase64(String key, String message) {
+    public static String encodeBase64(String key, String message) {
         try {
             Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
             SecretKeySpec secret_key = new SecretKeySpec(key.getBytes("UTF-8"), "HmacSHA256");
