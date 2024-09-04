@@ -19,14 +19,14 @@ public class JacksonUtils {
      */
     public static final ObjectMapper DEFAULT_OBJECT_MAPPER = new ObjectMapper();
 
-    private static ObjectMapper objectMapperCamel;
+    private static final ObjectMapper OBJECT_MAPPER_CAMEL;
 
     private JacksonUtils() {}
 
-    private static void initObjectMapperCamel() {
-        objectMapperCamel = new ObjectMapper();
-        objectMapperCamel.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
-        objectMapperCamel.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    static {
+        OBJECT_MAPPER_CAMEL = new ObjectMapper();
+        OBJECT_MAPPER_CAMEL.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
+        OBJECT_MAPPER_CAMEL.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
     /**
@@ -35,16 +35,14 @@ public class JacksonUtils {
      * @param <T>    the type parameter
      * @param object the object
      * @return string string
-     * @return: return a string, if the object is null return ""
+     * @return: return a string, if the object is null return null
      */
     public static <T> String objectToJsonCamel(T object) {
         if (null == object)
             return null;
-        if (null == objectMapperCamel) {
-            initObjectMapperCamel();
-        }
+
         try {
-            return objectMapperCamel.writeValueAsString(object);
+            return OBJECT_MAPPER_CAMEL.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
@@ -54,11 +52,9 @@ public class JacksonUtils {
         if (json == null) {
             return null;
         }
-        if (null == objectMapperCamel) {
-            initObjectMapperCamel();
-        }
+
         try {
-            return (T) objectMapperCamel.readValue(json, clazz);
+            return OBJECT_MAPPER_CAMEL.readValue(json, clazz);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -72,7 +68,7 @@ public class JacksonUtils {
         Objects.requireNonNull(ob);
 
         try {
-            return (T) ob.readValue(json, clazz);
+            return ob.readValue(json, clazz);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
