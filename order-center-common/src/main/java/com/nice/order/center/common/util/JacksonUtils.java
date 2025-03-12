@@ -2,6 +2,7 @@ package com.nice.order.center.common.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
@@ -27,6 +28,7 @@ public class JacksonUtils {
         OBJECT_MAPPER_CAMEL = new ObjectMapper();
         OBJECT_MAPPER_CAMEL.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
         OBJECT_MAPPER_CAMEL.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        OBJECT_MAPPER_CAMEL.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     /**
