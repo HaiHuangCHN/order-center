@@ -15,7 +15,7 @@ public class BeanValidationException extends BusinessException {
 
     public static final String DEFAULT_BEAN_VALIDATION_EXCEPTION_ERROR_CODE = "99999";
 
-    public static final String DEFAULT_BEAN_VALIDATION_EXCEPTION_MESSAGE = "bean validation error!";
+    public static final String DEFAULT_BEAN_VALIDATION_EXCEPTION_ERROR_MESSAGE = "bean validation error!";
 
     /**
      * The errors which contains the filed name and the error message
@@ -24,7 +24,7 @@ public class BeanValidationException extends BusinessException {
     private final Errors errors;
 
     public BeanValidationException(Errors errors) {
-        super(DEFAULT_BEAN_VALIDATION_EXCEPTION_ERROR_CODE, DEFAULT_BEAN_VALIDATION_EXCEPTION_MESSAGE);
+        super(DEFAULT_BEAN_VALIDATION_EXCEPTION_ERROR_CODE, DEFAULT_BEAN_VALIDATION_EXCEPTION_ERROR_MESSAGE);
         this.errors = errors;
     }
 
