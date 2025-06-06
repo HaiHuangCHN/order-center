@@ -30,7 +30,7 @@ import java.util.List;
 public class OrderDetailServiceImpl implements OrderDetailService {
 
     /**
-     * TODO How to make it as global variable?
+     * TODO How to make it as global variable? Use Spring Event and register into a singlten bean?
      */
     private static final SnowFlakeIdGeneratorUtil SNOW_FLAKE = new SnowFlakeIdGeneratorUtil(10, 4);
 
@@ -92,7 +92,6 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         // If pass an id that is existed in DB, will get java.sql.SQLIntegrityConstraintViolationException: Duplicate
         // entry 'id' for key 'order_detail.PRIMARY'
         // if id not existed in DB, then successfully
-        // orderDetail.setId(5L);
         orderDetail.setOrderNo(String.valueOf(SNOW_FLAKE.nextId()));
         orderDetail.setPaymentStatus(0);
         orderDetail.setYn(YesOrNoEnum.YES.getCode());

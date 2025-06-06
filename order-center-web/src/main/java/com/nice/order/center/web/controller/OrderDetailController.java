@@ -6,7 +6,6 @@ import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
 import com.nice.order.center.service.dto.res.OrderDetailCreateResDTO;
 import com.nice.order.center.service.dto.res.OrderDetailQueryResDTO;
 import com.nice.order.center.service.service.order.OrderDetailService;
-import com.nice.order.center.web.vo.req.OrderDetailQueryReqVO;
 import com.nice.order.center.web.vo.req.OrderDetailReqVO;
 import com.nice.order.center.web.vo.res.OrderDetailCreateResVO;
 import com.nice.order.center.web.vo.res.OrderDetailQueryResVO;
@@ -40,7 +39,6 @@ public class OrderDetailController {
     public ResponseEntity<List<OrderDetailQueryResVO>> getOrder(HttpServletRequest request,
                                                                 @PathVariable("userNo") String userNo) {
         log.info("请求时间[{}]，接口URL[{}]，接口方法[{}]，调用结果[{}]，执行时间[{}]", LocalDateTime.now(), "", "", "", "");
-        log.info("请求时间[{}]，接口URL[{}]，接口方法[{}]，调用结果[{}]，执行时间[{}]", LocalDateTime.now(), "", "", "", "");
         log.info("servletPath：{}", request.getServletPath());
         log.info("userId：{}", request.getParameter("userNo"));
         log.info("arbitrary：{}", request.getParameter("arbitrary"));
@@ -52,16 +50,6 @@ public class OrderDetailController {
 
     @GetMapping(value = "/queryByOrderNo")
     public ResponseEntity<OrderDetailQueryResVO> getOrderByOrderNo(@RequestParam("orderNo") String orderNo) {
-        OrderDetailQueryResDTO resDto = orderDetailService.findOrderDetailByOrderNo(orderNo);
-        OrderDetailQueryResVO resVo = ModelMapperUtil.getModelMapperWithFieldMatching().map(resDto,
-                OrderDetailQueryResVO.class);
-        return ResponseEntity.status(HttpStatus.OK).body(resVo);
-    }
-
-    @GetMapping(value = "/queryByOrderNo2")
-    public ResponseEntity<OrderDetailQueryResVO> getOrderByOrderNo2(@RequestParam("orderNo") String orderNo,
-                                                                    @RequestBody OrderDetailQueryReqVO orderDetailQueryReqVo) {
-        log.info(JacksonUtils.objectToJsonCamel(orderDetailQueryReqVo));
         OrderDetailQueryResDTO resDto = orderDetailService.findOrderDetailByOrderNo(orderNo);
         OrderDetailQueryResVO resVo = ModelMapperUtil.getModelMapperWithFieldMatching().map(resDto,
                 OrderDetailQueryResVO.class);
