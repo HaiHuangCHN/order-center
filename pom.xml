@@ -24,7 +24,7 @@
         <module>order-center-dao</module>
         <module>order-center-service</module>
         <module>order-center-web</module>
-        <module>order-center-provider</module>
+        <module>order-center-api</module>
     </modules>
 
     <properties>

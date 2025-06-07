@@ -1,6 +1,6 @@
 package com.nice.order.center.web.controller;
 
-import com.nice.order.center.common.util.JacksonUtils;
+import com.nice.order.center.api.OrderCrudApi;
 import com.nice.order.center.common.util.ModelMapperUtil;
 import com.nice.order.center.service.dto.req.OrderDetailReqDTO;
 import com.nice.order.center.service.dto.res.OrderDetailCreateResDTO;
@@ -15,12 +15,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Type;
@@ -30,8 +25,7 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/order")
-public class OrderDetailController {
+public class OrderDetailController implements OrderCrudApi {
 
     private final OrderDetailService orderDetailService;
 

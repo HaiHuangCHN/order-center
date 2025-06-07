@@ -22,6 +22,12 @@
     <dependencies>
         <dependency>
             <groupId>com.nice</groupId>
+            <artifactId>order-center-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.nice</groupId>
             <artifactId>order-center-service</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
@@ -31,6 +37,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!--        Spring Cloud-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!--        Spring Cloud-->
 
         <!-- Swagger -->
         <dependency>
@@ -69,6 +86,31 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <!--不同环境Profile的唯一id-->
+            <id>dev</id>
+            <properties>
+                <current.env>dev</current.env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <current.env>test</current.env>
+            </properties>
+        </profile>
+        <profile>
+            <id>prd</id>
+            <properties>
+                <current.env>prd</current.env>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -76,6 +118,36 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <!--        https://zhuanlan.zhihu.com/p/305816099?utm_id=0-->
+        <resources>
+            <!-- 将 extraConfig 目录下的 extra1.properties 文件打包 -->
+            <resource>
+                <directory>src/main/resources/extraConfig</directory>
+                <includes>
+                    <include>extra1.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>application.yml</include>
+                    <include>bootstrap.yml</include>
+                    <include>*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>application-${current.env}.yml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>bootstrap-${current.env}.yml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
 </project>

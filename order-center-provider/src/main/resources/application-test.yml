@@ -1,2 +1,0 @@
-default:
-  echoMsg: "Hello World - Local - Test"

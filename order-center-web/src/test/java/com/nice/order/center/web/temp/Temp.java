@@ -3,6 +3,7 @@ package com.nice.order.center.web.temp;
 import com.nice.order.center.common.util.JacksonUtils;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.config.RequestConfig;
@@ -17,9 +18,14 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * TODO Fill in desc
@@ -29,6 +35,7 @@ import java.util.Set;
  * @date 2025/3/11 14:41
  * @since 0.1.0
  */
+@Slf4j
 public class Temp {
 
     /**
@@ -92,7 +99,7 @@ public class Temp {
                     httpPost.setHeader("Session", "e8fb1934-a666-402a-ad4a-d2c6da0eaa7d");
                     httpPost.setHeader("Warehouse", payload.warehouseCode);
 
-                    String body = "{\"consignmentNos\":[\""+ payload.consignmentNo + "\"]}";
+                    String body = "{\"consignmentNos\":[\"" + payload.consignmentNo + "\"]}";
                     httpPost.setEntity(new StringEntity(body, CharEncoding.UTF_8));
                     System.out.println("请求体=" + body);
 
@@ -143,4 +150,44 @@ public class Temp {
         private String topologyName;
         private String consignmentNo;
     }
+
+    @Getter
+    @Setter
+    public class ItaskSn implements Serializable {
+
+        private static final long serialVersionUID = 1L;
+
+        private String boxBarcode;
+
+        private String skuId;
+
+    }
+
+    @Test
+    public void test1() {
+        List<ItaskSn> itaskSnListContainerNo = new ArrayList<>();
+        ItaskSn itaskSn1 = new ItaskSn();
+        itaskSn1.setBoxBarcode("box1");
+        itaskSn1.setSkuId("sku1");
+
+        ItaskSn itaskSn2 = new ItaskSn();
+        itaskSn2.setBoxBarcode("box1");
+        itaskSn2.setSkuId("sku1");
+
+        itaskSnListContainerNo.add(itaskSn1);
+        itaskSnListContainerNo.add(itaskSn2);
+
+        Map<String, String> boxSku = itaskSnListContainerNo.stream().collect(Collectors.toMap(ItaskSn::getBoxBarcode,
+                ItaskSn::getSkuId));
+
+        System.out.println(boxSku);
+
+    }
+
+    @Test
+    public void test2() {
+        String a = null;
+        log.info("a = {}", a);
+    }
+
 }

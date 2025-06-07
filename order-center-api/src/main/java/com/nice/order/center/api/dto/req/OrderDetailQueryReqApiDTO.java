@@ -1,4 +1,4 @@
-package com.nice.order.center.provider.dto.res;
+package com.nice.order.center.api.dto.req;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,10 +7,10 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class OrderDetailCreateRemoteResDTO implements Serializable {
+public class OrderDetailQueryReqApiDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String orderNo;
+    private Long id;
 
 }

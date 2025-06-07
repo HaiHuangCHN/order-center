@@ -1,4 +1,4 @@
-package com.nice.order.center.provider.dto.res;
+package com.nice.order.center.api.dto.res;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-public class OrderDetailQueryRemoteResDTO implements Serializable {
+public class OrderDetailQueryResApiDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
