@@ -5,7 +5,8 @@ spring:
         serverAddr: ${NACOS_SERVER_ADDR:} # Nacos服务注册中心地址
         username: ${NACOS_SERVER_USERNAME:}
         password: ${NACOS_SERVER_PASSWORD:}
-        enabled: true
+        namespace: 897e12b7-27d7-47d7-928c-30bb79d9dd75
+        group: ORDER_GROUP
 
       config:
         serverAddr: ${NACOS_SERVER_ADDR:} # Nacos 作为配置中心地址
@@ -20,3 +21,7 @@ management:
     web:
       exposure:
         include: '*'
+
+bootstrap:
+  config:
+    inDefaultProfile: "Bootstrap Config In Prd Profile Local"
