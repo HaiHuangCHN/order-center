@@ -89,7 +89,7 @@
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/resources/profile</directory>
+                <directory>src/main/resources</directory>
                 <includes>
                     <include>application.yml</include>
                     <include>bootstrap.yml</include>
@@ -97,13 +97,13 @@
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/resources/profile</directory>
+                <directory>src/main/resources</directory>
                 <includes>
                     <include>application-${current.env}.yml</include>
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/resources/profile</directory>
+                <directory>src/main/resources</directory>
                 <includes>
                     <include>bootstrap-${current.env}.yml</include>
                 </includes>
