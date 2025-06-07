@@ -50,4 +50,12 @@ public class TestController {
         return ResponseEntity.status(HttpStatus.OK).body(sb);
     }
 
+    @Value("${default.echoMsg}")
+    private String defaultEchoMsg;
+
+    @GetMapping(value = "/getDefaultEchoMsg")
+    public ResponseEntity<String> getDefaultEchoMsg() {
+        return ResponseEntity.status(HttpStatus.OK).body(defaultEchoMsg);
+    }
+
 }
