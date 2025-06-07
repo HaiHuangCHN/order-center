@@ -1,6 +1,2 @@
 default:
-  echoMsg: "Hello World - Local - Default - Out"
-
-application:
-  config:
-    inDefaultProfile: "Application Config In Default Profile Local - Out"
+  echoMsg: "Hello World - Local - Default"
