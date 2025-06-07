@@ -1,5 +1,5 @@
 default:
-  echoMsg: "Hello World - Local - Default"
+  echoMsg: "Hello World - Local - Default - Out"
 
 application:
   config:
