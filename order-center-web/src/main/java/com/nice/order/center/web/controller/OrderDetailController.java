@@ -29,35 +29,32 @@ public class OrderDetailController implements OrderCrudApi {
 
     private final OrderDetailService orderDetailService;
 
-    @GetMapping(value = "/queryByUserNo/{userNo}")
-    public ResponseEntity<List<OrderDetailQueryResVO>> getOrder(HttpServletRequest request,
-                                                                @PathVariable("userNo") String userNo) {
-        log.info("请求时间[{}]，接口URL[{}]，接口方法[{}]，调用结果[{}]，执行时间[{}]", LocalDateTime.now(), "", "", "", "");
-        log.info("servletPath：{}", request.getServletPath());
-        log.info("userId：{}", request.getParameter("userNo"));
-        log.info("arbitrary：{}", request.getParameter("arbitrary"));
+    @GetMapping(value = "/queryByUserNo")
+    public ResponseEntity<List<OrderDetailQueryResVO>> getOrder(@RequestParam("userNo") String userNo) {
         List<OrderDetailQueryResDTO> resDto = orderDetailService.findOrderDetailByUserNo(userNo);
         Type type = new TypeToken<List<OrderDetailQueryResVO>>() {}.getType();
         List<OrderDetailQueryResVO> resVo = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(resDto, type);
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 
-    @GetMapping(value = "/queryByOrderNo")
-    public ResponseEntity<OrderDetailQueryResVO> getOrderByOrderNo(@RequestParam("orderNo") String orderNo) {
+    @GetMapping(value = "/queryByOrderNo/{orderNo}")
+    public ResponseEntity<OrderDetailQueryResVO> getOrderByOrderNo(HttpServletRequest request,
+                                                                   @PathVariable("orderNo") String orderNo) {
+        log.info("请求时间[{}]，接口URL[{}]，接口方法[{}]，调用结果[{}]，执行时间[{}]", LocalDateTime.now(), "", "", "", "");
+        log.info("servletPath：{}", request.getServletPath());
+        log.info("orderNo：{}", request.getParameter("orderNo"));
+        log.info("arbitrary：{}", request.getParameter("arbitrary"));
         OrderDetailQueryResDTO resDto = orderDetailService.findOrderDetailByOrderNo(orderNo);
-        OrderDetailQueryResVO resVo = ModelMapperUtil.getModelMapperWithFieldMatching().map(resDto,
-                OrderDetailQueryResVO.class);
+        OrderDetailQueryResVO resVo = ModelMapperUtil.getModelMapperWithFieldMatching().map(resDto, OrderDetailQueryResVO.class);
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 
-    // TODO Get the user from session instead of parameter
+    // TODO hai Get the user from session instead of parameter
     @PostMapping(value = "order/create")
     public ResponseEntity<OrderDetailCreateResVO> createOrder(@RequestBody OrderDetailReqVO orderDetailReqVO) {
-        OrderDetailReqDTO orderDetailReqDto = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqVO,
-                OrderDetailReqDTO.class);
+        OrderDetailReqDTO orderDetailReqDto = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailReqVO, OrderDetailReqDTO.class);
         OrderDetailCreateResDTO orderDetailCreateResDto = orderDetailService.createOrder(orderDetailReqDto);
-        OrderDetailCreateResVO resVo = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailCreateResDto,
-                OrderDetailCreateResVO.class);
+        OrderDetailCreateResVO resVo = ModelMapperUtil.DEFAULT_MODEL_MAPPER.map(orderDetailCreateResDto, OrderDetailCreateResVO.class);
         return ResponseEntity.status(HttpStatus.OK).body(resVo);
     }
 

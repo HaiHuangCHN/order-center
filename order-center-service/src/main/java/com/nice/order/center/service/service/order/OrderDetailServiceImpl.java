@@ -36,11 +36,6 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
     private final OrderDetailMapper orderDetailMapper;
 
-    /**
-     *
-     * @param userNo
-     * @return
-     */
     @Override
     public List<OrderDetailQueryResDTO> findOrderDetailByUserNo(String userNo) {
         Example example = MapperUtils.buildExample(OrderDetail.class, o -> o

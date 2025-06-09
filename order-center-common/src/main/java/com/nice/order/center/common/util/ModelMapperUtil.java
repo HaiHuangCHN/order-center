@@ -4,9 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
 import org.modelmapper.convention.MatchingStrategies;
 
-/**
- * TODO Any problem with ModelMapper + Lombok?
- */
 public class ModelMapperUtil {
 
     public static final ModelMapper DEFAULT_MODEL_MAPPER = new ModelMapper();
