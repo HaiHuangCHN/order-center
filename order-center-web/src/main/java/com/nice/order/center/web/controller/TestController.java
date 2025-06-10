@@ -1,9 +1,13 @@
 package com.nice.order.center.web.controller;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +21,7 @@ import java.time.LocalTime;
  * @author haihuang95@zto.com
  * @date 2023/1/18 16:09
  */
+@RefreshScope
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -54,8 +59,16 @@ public class TestController {
     private String defaultEchoMsg;
 
     @GetMapping(value = "/getDefaultEchoMsg")
-    public ResponseEntity<String> getDefaultEchoMsg() {
-        return ResponseEntity.status(HttpStatus.OK).body(defaultEchoMsg);
+    public ResponseEntity<TestClass> getDefaultEchoMsg() {
+        TestClass testClass = new TestClass();
+        testClass.setField1("field1");
+        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(testClass);
+    }
+
+    @Getter
+    @Setter
+    private static class TestClass {
+        private String field1;
     }
 
 }
