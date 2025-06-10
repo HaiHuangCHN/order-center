@@ -61,14 +61,14 @@ public class TestController {
     @GetMapping(value = "/getDefaultEchoMsg")
     public ResponseEntity<TestClass> getDefaultEchoMsg() {
         TestClass testClass = new TestClass();
-        testClass.setField1("field1");
+        testClass.setField("field1");
         return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(testClass);
     }
 
     @Getter
     @Setter
     private static class TestClass {
-        private String field1;
+        private String field;
     }
 
 }
