@@ -28,6 +28,13 @@ import java.time.LocalTime;
 @RequestMapping("/test")
 public class TestController {
 
+
+    @Getter
+    @Setter
+    private static class TestClass {
+        private String field;
+    }
+
     @Value("${test.inject.field}")
     private String testInjectField;
 
@@ -65,10 +72,12 @@ public class TestController {
         return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(testClass);
     }
 
-    @Getter
-    @Setter
-    private static class TestClass {
-        private String field;
+    @GetMapping(value = "/testSentinel")
+    public ResponseEntity<TestClass> testSentinel() {
+        TestClass testClass = new TestClass();
+        testClass.setField("field1");
+        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(testClass);
     }
+
 
 }
