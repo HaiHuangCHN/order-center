@@ -31,7 +31,7 @@ public class TestController {
 
     @Getter
     @Setter
-    private static class TestClass {
+    private static class TestClassResDTO {
         private String field;
     }
 
@@ -66,17 +66,17 @@ public class TestController {
     private String defaultEchoMsg;
 
     @GetMapping(value = "/getDefaultEchoMsg")
-    public ResponseEntity<TestClass> getDefaultEchoMsg() {
-        TestClass testClass = new TestClass();
-        testClass.setField("field1");
-        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(testClass);
+    public ResponseEntity<TestClassResDTO> getDefaultEchoMsg() {
+        TestClassResDTO testClassRes = new TestClassResDTO();
+        testClassRes.setField("field1");
+        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(testClassRes);
     }
 
     @GetMapping(value = "/testSentinel")
-    public ResponseEntity<TestClass> testSentinel() {
-        TestClass testClass = new TestClass();
-        testClass.setField("field1");
-        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(testClass);
+    public ResponseEntity<TestClassResDTO> testSentinel() {
+        TestClassResDTO testClassRes = new TestClassResDTO();
+        testClassRes.setField("field1");
+        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(testClassRes);
     }
 
 
